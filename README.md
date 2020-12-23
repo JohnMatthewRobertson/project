@@ -77,3 +77,9 @@ django-admin startproject config .
 cd config 
 
 create .env
+
+#### running djanog
+
+run development server 
+
+python manage.py runserver
