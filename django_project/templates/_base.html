@@ -1,18 +1,56 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> 
   <title>{% block title %}Hub Home{% endblock title %}</title>
 </head>
 
 <body>
+
+
+ 
+<!-- A grey horizontal navbar that becomes vertical on small screens -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+    <a class="navbar-brand" href="#">WebSiteName</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hub:hub_home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 3</a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav ms-auto">
+    {% if user.is_authenticated %}
+      <h2>Hi {{ user.email }}<h2>
+      <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><span class="fas fa-user"></span>Log Out</a></li>
+    {% else %}
+      <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}"><span class="fas fa-user"></span> Sign Up</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><span class="fas fa-user"></span> Log In</a></li>
+    {% endif %}
+    </ul>
+
+</nav>
+ 
   
   <div >
     {% block content %}
     {% endblock content %}
   </div>
 
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 
 </html>

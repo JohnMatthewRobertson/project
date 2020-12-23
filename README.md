@@ -142,3 +142,10 @@ python manage.py test <app name>
 python manage.py test <app name>.tests.<test name>
 
 python manage.py test functional_tests.<test name>
+
+
+#### static 
+
+to collect static content for production 
+
+python manage.py collectstatic

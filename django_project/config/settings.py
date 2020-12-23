@@ -141,5 +141,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# defines location in local development
+STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
+
+# defines location for production
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+
+# though implicitly set recommended to explicitly set it
+STATICFILES_FINDERS = [
+    # uses STATICFILES_DIR setting
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    # search for any directory named static with an app
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
 LOGIN_REDIRECT_URL = 'hub:hub_home'
 LOGOUT_REDIRECT_URL = 'hub:hub_home'
