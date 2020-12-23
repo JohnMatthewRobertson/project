@@ -86,8 +86,12 @@ cd config
 
 create .env
 
-#### running djanog
+#### running django
 
 run development server 
 
 python manage.py runserver
+
+#### create app
+
+python manage.py startapp <app name>
