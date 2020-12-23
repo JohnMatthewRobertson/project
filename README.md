@@ -88,6 +88,9 @@ https://pypi.org/project/django-crispy-forms/
 
 pip install django-crispy-forms
 
+https://pypi.org/project/django-allauth/
+
+pip install django-allauth
 
 #### creating project 
 

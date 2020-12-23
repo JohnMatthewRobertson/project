@@ -53,9 +53,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'hub.apps.HubConfig',
     'accounts.apps.AccountsConfig',
+    'crispy_forms',
+    'allauth.account',
 ]
+
+# django crispy forms setting
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # setting to allow custom user instead of default user model
 # https://docs.djangoproject.com/en/3.1/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project
@@ -157,3 +163,13 @@ STATICFILES_FINDERS = [
 
 LOGIN_REDIRECT_URL = 'hub:hub_home'
 LOGOUT_REDIRECT_URL = 'hub:hub_home'
+
+# django allauth setting
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
