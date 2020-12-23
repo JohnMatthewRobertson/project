@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'hub.apps.HubConfig',
     'accounts.apps.AccountsConfig',
+    'skills.apps.SkillsConfig',
     'crispy_forms',
     'allauth.account',
 ]
