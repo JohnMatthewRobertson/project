@@ -25,4 +25,5 @@ urlpatterns = [
 
     # local application
     path('', include('hub.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
