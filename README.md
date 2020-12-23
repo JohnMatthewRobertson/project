@@ -84,6 +84,11 @@ https://pypi.org/project/webdriver-manager/
 pip install webdriver-manager
 
 
+https://pypi.org/project/django-crispy-forms/
+
+pip install django-crispy-forms
+
+
 #### creating project 
 
 the . on the end stops creating an extra folder
