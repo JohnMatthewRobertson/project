@@ -95,3 +95,27 @@ python manage.py runserver
 #### create app
 
 python manage.py startapp <app name>
+
+
+#### authentication
+
+authentication views
+
+https://docs.djangoproject.com/en/3.1/topics/auth/default/#module-django.contrib.auth.views
+
+
+custom user model recommended
+
+https://docs.djangoproject.com/en/3.1/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project
+
+
+#### database 
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+
+#### django create super user
+
+python manage.py createsuperuser
