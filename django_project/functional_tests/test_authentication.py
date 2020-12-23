@@ -33,11 +33,11 @@ class AuthenticationTest(FunctionalTest):
 
         login_link.click()
 
-        username = self.browser.find_element_by_id('id_username')
+        username = self.browser.find_element_by_id('id_login')
         
         username.click()
 
-        username.send_keys(self.test_username)
+        username.send_keys(self.test_useremail)
 
         password = self.browser.find_element_by_id('id_password')
 
@@ -53,10 +53,14 @@ class AuthenticationTest(FunctionalTest):
 
         self.assertEqual(loggedin_message.text, 'Hi testuserone@email.com')
 
-        login_link = self.browser.find_element_by_link_text('Log Out')
-        self.assertEqual(login_link.text, "Log Out")
+        logout_link = self.browser.find_element_by_link_text('Log Out')
+        self.assertEqual(logout_link.text, "Log Out")
 
-        login_link.click()
+        logout_link.click()
+
+        submit_buttom = self.browser.find_element_by_css_selector('button')
+
+        submit_buttom.click()
 
         loggedout_message = self.browser.find_element_by_css_selector('h2')
 
@@ -66,6 +70,7 @@ class AuthenticationTest(FunctionalTest):
 
         self.test_username = 'testwronguser'
         self.test_userpassword = 'testpwrongpassword'
+        self.test_useremail = 'testwrongemail@email.com'
 
         self.browser.get(self.live_server_url)
         self.browser.set_window_size(1024, 768)
@@ -75,11 +80,11 @@ class AuthenticationTest(FunctionalTest):
 
         login_link.click()
 
-        username = self.browser.find_element_by_id('id_username')
+        username = self.browser.find_element_by_id('id_login')
         
         username.click()
 
-        username.send_keys(self.test_username)
+        username.send_keys(self.test_useremail)
 
         password = self.browser.find_element_by_id('id_password')
 
@@ -91,10 +96,9 @@ class AuthenticationTest(FunctionalTest):
 
         submit_buttom.click()
 
-        html_list = self.browser.find_element_by_class_name("errorlist")
-        items = html_list.find_elements_by_tag_name("li")
-
-        self.assertEqual(items[0].text, 'Please enter a correct username and password. Note that both fields may be case-sensitive.')
+        html_list = self.browser.find_element_by_css_selector('div.alert.alert-block.alert-danger')
+    
+        self.assertEqual(html_list.text, 'The e-mail address and/or password you specified are not correct.')
        
 
 

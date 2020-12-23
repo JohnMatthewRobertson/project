@@ -21,9 +21,10 @@ urlpatterns = [
     path('devadminportal/', admin.site.urls),
 
     # Account management
-    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
+
 
     # local application
     path('', include('hub.urls')),
-    path('accounts/', include('accounts.urls')),
 ]

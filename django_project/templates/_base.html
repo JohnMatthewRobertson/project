@@ -28,10 +28,10 @@
   <ul class="navbar-nav ms-auto">
     {% if user.is_authenticated %}
       <li class="nav-item"><a class="nav-link disabled" href="#"><span class="fas fa-user">{{ user.email }}</span></a></li>
-      <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><span class="fas fa-user">Log Out</span></a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}"><span class="fas fa-user">Log Out</span></a></li>
     {% else %}
-      <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}"><span class="fas fa-user"></span> Sign Up</a></li>
-      <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><span class="fas fa-user"></span> Log In</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}"><span class="fas fa-user"></span> Sign Up</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}"><span class="fas fa-user"></span> Log In</a></li>
     {% endif %}
     </ul>
 

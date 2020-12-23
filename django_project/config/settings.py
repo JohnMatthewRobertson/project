@@ -164,12 +164,28 @@ STATICFILES_FINDERS = [
 LOGIN_REDIRECT_URL = 'hub:hub_home'
 LOGOUT_REDIRECT_URL = 'hub:hub_home'
 
+# account logout redirect overrides logout redirect url
+ACCOUNT_LOGOUT_REDIRECT = 'hub:hub_home'
+
 # django allauth setting
 SITE_ID = 1
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_UNIQUE_EMAIL = True
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
