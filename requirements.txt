@@ -8,7 +8,9 @@ certifi==2020.12.5
 chardet==4.0.0
 click==7.1.2
 colorama==0.4.4
+configparser==5.0.1
 coverage==5.3.1
+crayons==0.4.0
 Django==3.1.4
 dparse==0.5.1
 flake8==3.8.4
@@ -32,6 +34,7 @@ PyYAML==5.3.1
 regex==2020.11.13
 requests==2.25.1
 safety==1.10.0
+selenium==3.141.0
 six==1.15.0
 smmap==3.0.4
 sqlparse==0.4.1
@@ -40,5 +43,6 @@ toml==0.10.2
 typed-ast==1.4.1
 typing-extensions==3.7.4.3
 urllib3==1.26.2
+webdriver-manager==3.2.2
 wrapt==1.12.1
 yapf==0.30.0

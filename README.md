@@ -74,6 +74,16 @@ coverage run --source='.' manage.py test
 
 coverage report > ../static_code_analysis_reports/coverage_output.txt
 
+
+https://pypi.org/project/selenium/
+
+pip install selenium
+
+https://pypi.org/project/webdriver-manager/
+
+pip install webdriver-manager
+
+
 #### creating project 
 
 the . on the end stops creating an extra folder
@@ -113,9 +123,22 @@ https://docs.djangoproject.com/en/3.1/topics/auth/customizing/#using-a-custom-us
 
 python manage.py makemigrations
 
+python manage.py makemigrations <app name>
+
 python manage.py migrate
 
 
 #### django create super user
 
 python manage.py createsuperuser
+
+
+#### tests
+
+python manage.py test
+
+python manage.py test <app name>
+
+python manage.py test <app name>.tests.<test name>
+
+python manage.py test functional_tests.<test name>
