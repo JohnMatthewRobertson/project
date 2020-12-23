@@ -41,5 +41,4 @@ class FunctionalTest(StaticLiveServerTestCase):
         self.browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
 
     def tearDown(self):
-        self.browser.refresh()
         self.browser.close()
