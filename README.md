@@ -66,6 +66,14 @@ https://pypi.org/project/python-dotenv/
 
 pip install python-dotenv
 
+https://pypi.org/project/coverage/
+
+pip install coverage
+
+coverage run --source='.' manage.py test
+
+coverage report > ../static_code_analysis_reports/coverage_output.txt
+
 #### creating project 
 
 the . on the end stops creating an extra folder
