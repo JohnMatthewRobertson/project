@@ -3,12 +3,12 @@
 {% block title %}Skills{% endblock title %}
 
 {% block content %}
-<h1>JOHN</h1>
 
-{% for skill in object_list %}
-<div>
+
+{% for skill in skill_list %}
+<div class="container">
     <h2>
-        <a href="">{{ skill.skill_name }}</a>
+        <a href="{{ skill.get_absolute_url }}">{{ skill.skill_name }}</a>
     </h2>
 </div>
 {% endfor %}
