@@ -28,5 +28,6 @@ urlpatterns = [
     # local application
     path('', include('hub.urls')),
     path('skills/', include('skills.urls')),
+    path('feedback/', include('feedback.urls')),
 
 ]

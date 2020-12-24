@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'hub.apps.HubConfig',
     'accounts.apps.AccountsConfig',
     'skills.apps.SkillsConfig',
+    'feedback.apps.FeedbackConfig',
     'crispy_forms',
     'allauth.account',
 ]

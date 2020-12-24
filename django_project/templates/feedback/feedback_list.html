@@ -1,0 +1,39 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    FeedBack
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    
+    <form action="{% url 'feedback:new_feedback' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_message">Feed Back:</label>
+            <input id="id_message" type="text" class="form-control" placeholder="Enter Some Feed Back Be Honest Please">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+   
+            <input id="id_author" type="hidden" value="{{ user.id }}">
+     
+      
+           
+      
+    </form>
+</div>
+   
+    <h1>Feed Back</h1>
+    {% for msg in feedback_list %}
+    <div class="container">
+            <p href="">{{ msg.message }}</p>
+    
+    </div>
+    {% endfor%}
+
+  
+</div>
+{% endblock %}
