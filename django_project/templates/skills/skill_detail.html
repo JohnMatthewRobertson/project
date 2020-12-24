@@ -8,4 +8,20 @@
     <p>Description: {{ skill.skill_description }}</p>
 </div>
 
+<div class="container">
+    <h3>Category</h3>
+    {% for category in skill.skill_category.all %}
+        <p>{{ category.skill_category }}</p>
+        <p>{{ category.skill_category_description }}</p>
+    {% endfor %}
+</div>
+
+<div class="container">
+    <h3>Sub Category</h3>
+    {% for sub_category in skill.skill_sub_category.all %}
+        <p>{{ sub_category.skill_sub_category }}</p>
+        <p>{{ sub_category.skill_sub_category_description }}</p>
+    {% endfor %}
+</div>
+
 {% endblock %}

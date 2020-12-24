@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+<div class="container">
+<h1>Search Results</h1>
+{% for skill in skill_list %}
+<div>
+    <h3><a href="{{ skill.get_absolute_url }}">{{ skill.skill_name }}</a></h3>
+    <p>Skill:{{ skill.skill_name }}</p>
+    <p>Description: {{ skill.skill_description }}</p>
+</div>
+
+{% endfor %}
+</div>
+
+{% endblock %}
