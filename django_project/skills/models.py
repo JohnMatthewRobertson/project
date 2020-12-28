@@ -6,6 +6,12 @@ from django.urls import reverse
 # Create your models here.
 
 class SkillCategory(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+
     skill_category = models.CharField(max_length=200)
     skill_category_description = models.CharField(max_length=200)
     
@@ -13,6 +19,12 @@ class SkillCategory(models.Model):
         return self.skill_category
 
 class SkillSubCategory(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    
     skill_sub_category = models.CharField(max_length=200)
     skill_sub_category_description = models.CharField(max_length=200)
 

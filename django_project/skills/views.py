@@ -3,6 +3,8 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from skills.models import Skill
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -27,3 +29,8 @@ class SearchResultsListView(ListView):
         query = self.request.GET.get('q')
         return Skill.objects.filter(
             Q(skill_name__icontains=query) | Q(skill_category__skill_category__icontains=query))
+
+
+class SkillCreate(CreateView):
+    model = Skill
+    fields = ['skill_name', 'skill_description', 'skill_category', 'skill_sub_category']
