@@ -3,7 +3,8 @@ from .models import Feedback
 
 # Register your models here.
 
+@admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ("message", "author",)
-
-admin.site.register(Feedback, FeedbackAdmin)
+    list_display = ('author', 'active', 'created', 'updated', 'message')
+    list_filter = ('active', 'created', 'updated')
+    search_fields = ('message',)

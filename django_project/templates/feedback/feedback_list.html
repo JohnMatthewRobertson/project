@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load feedback_tags %}
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -10,30 +11,30 @@
 
 <div class="container">
     
-    <form action="{% url 'feedback:new_feedback' %}" method="post">
+    <form action="{% url 'feedback:new_feedback' %}" method="POST">
         {% csrf_token %}
         <div class="form-group">
             <label for="id_message">Feed Back:</label>
             <input id="id_message" type="text" class="form-control" placeholder="Enter Some Feed Back Be Honest Please">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-   
-            <input id="id_author" type="hidden" value="{{ user.id }}">
-     
-      
-           
-      
     </form>
 </div>
    
+<div class="container">
     <h1>Feed Back</h1>
+    <p>Total messages {% feedback_message_count_tag %}</p>
     {% for msg in feedback_list %}
-    <div class="container">
-            <p href="">{{ msg.message }}</p>
-    
-    </div>
+    <div class="card bg-light text-dark">
+        <div class="card-body">
+          <h4 class="card-title">User: {{ msg.author}}</h4>
+          <p class="card-text">{{ msg.message }}</p>
+          <p class="card-text">Posted: {{ msg.created }}</p>
+        </div>
+      </div>       
     {% endfor%}
+</div>
 
-  
+{% include "pagination.html" with page=page_obj %}
 </div>
 {% endblock %}
