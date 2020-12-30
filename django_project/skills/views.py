@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from skills.models import Skill, SkillCategory, SkillSubCategory
+from skills.models import Skill, SkillCategory, SkillSubCategory, UserSkill
 from skills.forms import SkillCategoryModelForm, SkillSubCategoryModelForm
 from django.views.generic.edit import CreateView, FormView
 from django.urls import reverse_lazy
@@ -48,3 +48,14 @@ class SkillSubCategoryCreateView(BSModalCreateView):
     form_class = SkillSubCategoryModelForm
     success_message = 'Success: sub category created'
     success_url = reverse_lazy('skills:skill_add')
+
+class UserSkillCreate(CreateView):
+    model = UserSkill
+    fields = ['author', 'user_skill', 'user_skill_category', 'user_skill_sub_category']
+    template_name = 'skills/skill_create_user_skill.html'
+
+class UserSkillListView(LoginRequiredMixin, ListView):
+    model = UserSkill
+    context_object_name = 'user_skill_list'
+    template_name = 'skills/user_skill_list.html'
+    login_url = 'account_login'

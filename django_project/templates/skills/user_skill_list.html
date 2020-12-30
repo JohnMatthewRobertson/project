@@ -1,0 +1,38 @@
+{% extends '_base.html' %}
+
+{% block title %}User Skills{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="container">
+        <form class="form-inline mt-2 mt-md-0" action="{% url 'skills:search_results' %}" method="get">
+            {% csrf_token %}
+            <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </form>
+    </div>
+
+{% for item in user_skill_list %}
+    <div class="container mt-3">
+        <div class="media border p-3">
+          <img src="" alt="" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+          <div class="media-body">
+            <h4>{{ item.user_skill.skill_name}}<small><i> Posted on February 19, 2016</i></small></h4>
+          
+
+            {% for category in item.user_skill_category.all %}
+                <p>{{ category.skill_category }}</p>
+            {% endfor %}
+     
+            {% for sub_category in item.user_skill_sub_category.all %}
+                <p>{{ sub_category.skill_sub_category }}</p>
+            {% endfor %} 
+          </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+</div>
+{% endblock content %}
