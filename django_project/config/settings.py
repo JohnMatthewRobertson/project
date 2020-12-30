@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'feedback.apps.FeedbackConfig',
     'crispy_forms',
     'allauth.account',
+    'bootstrap_modal_forms',
 ]
 
 # django crispy forms setting

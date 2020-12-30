@@ -6,7 +6,7 @@ from feedback.models import Feedback
 from feedback.forms import FeedbackForm
 from django.http import HttpResponseRedirect
 from django.views import View
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
@@ -23,15 +23,10 @@ class FeedBackList(LoginRequiredMixin, FormMixin, ListView):
 class NewFeedBack(LoginRequiredMixin, View):
 
     def post(self,request, *args, **kwargs):
-        new_feedback = FeedbackForm(request.POST
-        print(new_feedback['message'])
-
-        if request.user.is_authenticated:
-            print("john")
-            new_feedback.author = 'admin'
+        new_feedback = FeedbackForm(request.POST)
+        new_feedback.instance.author = request.user
 
         if new_feedback.is_valid():
-            print("john")
             new_feedback.save()
-            return redirect('feedback:feedback_list')
+            return redirect(reverse('feedback:feedback_list'))
 

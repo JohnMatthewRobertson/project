@@ -5,14 +5,14 @@
 
 <head>
   <meta charset="utf-8">
-  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
   <title>{% block title %}Hub Home{% endblock title %}</title>
 </head>
 
 <body>
 
 
-
+{% block navbar %}
 <!-- A grey horizontal navbar that becomes vertical on small screens -->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <a class="navbar-brand" href="#"> WebSiteName</a>
@@ -22,15 +22,19 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'hub:hub_home' %}"> Home</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'skills:skill_list' %}"> Skills</a>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> Skills Options</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'skills:skill_list' %}">Skill</a>
+        <a class="dropdown-item" href="{% url 'skills:skill_add' %}">Add Skill</a>
+      </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'feedback:feedback_list' %}"> Feedback</a>
     </li>
   </ul>
 
-  <ul class="navbar-nav ms-auto">
+  <ul class="navbar-nav ml-auto">
     {% if user.is_authenticated %}
       <li class="nav-item"><a class="nav-link disabled" href="#"><span class="fas fa-user">{{ user.email}}</span></a></li>
       <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}"><span class="fas fa-user">Log Out</span></a></li>
@@ -42,14 +46,47 @@
 
 </nav>
 
+{% endblock navbar %}
  
   
   <div >
     {% block content %}
+
     {% endblock content %}
   </div>
 
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+ <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+    
+        $("#create-book").modalForm({
+            formURL: "{% url 'skills:skill_category_add' %}"
+        });
+    
+    });
+    </script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  
+      $("#create-sub").modalForm({
+          formURL: "{% url 'skills:skill_sub_category_add' %}"
+      });
+  
+  });
+  </script>
+
 </body>
 
 </html>
