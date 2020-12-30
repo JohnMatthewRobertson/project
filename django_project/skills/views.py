@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from skills.models import Skill, SkillCategory, SkillSubCategory, UserSkill
-from skills.forms import SkillCategoryModelForm, SkillSubCategoryModelForm
+from skills.models import Skill, SkillCategory, SkillSubCategory, UserSkill, SkillMain
+from skills.forms import SkillCategoryModelForm, SkillSubCategoryModelForm, SkillMainModelForm, UserSkillModelForm, UserSkillModelFormModal
 from django.views.generic.edit import CreateView, FormView
 from django.urls import reverse_lazy
-from bootstrap_modal_forms.generic import BSModalCreateView
+from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView
 
 # Create your views here.
 
@@ -32,22 +32,24 @@ class SearchResultsListView(ListView):
         return Skill.objects.filter(
             Q(skill_name__icontains=query) | Q(skill_category__skill_category__icontains=query))
 
-class SkillCreate(CreateView):
-    model = Skill
-    fields = ['skill_name', 'skill_description', 'skill_category', 'skill_sub_category']
-
+class SkillCreateView(BSModalCreateView):
+    template_name = 'skills/skill_create_skill.html'
+    form_class = SkillMainModelForm
+    success_message = 'Success: category created'
+    success_url = reverse_lazy('skills:user_skill_add')
+    
 
 class SkillCategoryCreateView(BSModalCreateView):
     template_name = 'skills/skill_create_skill_category.html'
     form_class = SkillCategoryModelForm
     success_message = 'Success: category created'
-    success_url = reverse_lazy('skills:skill_add')
+    success_url = reverse_lazy('skills:user_skill_add')
 
 class SkillSubCategoryCreateView(BSModalCreateView):
     template_name = 'skills/skill_create_skill_sub_category.html'
     form_class = SkillSubCategoryModelForm
     success_message = 'Success: sub category created'
-    success_url = reverse_lazy('skills:skill_add')
+    success_url = reverse_lazy('skills:user_skill_add')
 
 class UserSkillCreate(CreateView):
     model = UserSkill
@@ -59,3 +61,11 @@ class UserSkillListView(LoginRequiredMixin, ListView):
     context_object_name = 'user_skill_list'
     template_name = 'skills/user_skill_list.html'
     login_url = 'account_login'
+    paginate_by = 3
+
+class UserSkillUpdateView(BSModalUpdateView):
+    model = UserSkill
+    template_name = 'skills/skill_update_skill.html'
+    form_class = UserSkillModelFormModal
+    success_message = 'Success: category update'
+    success_url = reverse_lazy('skills:user_skill_list')

@@ -25,8 +25,8 @@
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> Skills Options</a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="{% url 'skills:skill_list' %}">Skill</a>
-        <a class="dropdown-item" href="{% url 'skills:skill_add' %}">Add Skill</a>
+        <a class="dropdown-item" href="{% url 'skills:user_skill_list' %}">Skill list</a>
+        <a class="dropdown-item" href="{% url 'skills:user_skill_add' %}">Add Skill</a>
       </div>
     </li>
     <li class="nav-item">
@@ -86,6 +86,32 @@
   
   });
   </script>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  
+      $("#create-skill").modalForm({
+          formURL: "{% url 'skills:skill_add' %}"
+      });
+  
+  });
+  </script>
+
+
+<script type="text/javascript">
+  $(function () {
+
+    // Update, Read and Delete book buttons open modal with id="modal" (default)
+    // The formURL is retrieved from the data of the element
+    $(".bs-modal").each(function () {
+      $(this).modalForm({
+          formURL: $(this).data('form-url')
+      });
+    });
+
+  });
+</script>
 
 </body>
 

@@ -3,6 +3,12 @@ from .models import Skill, SkillCategory, SkillSubCategory, SkillMain, UserSkill
 from bootstrap_modal_forms.forms import BSModalModelForm
 
 
+class SkillMainModelForm(BSModalModelForm):
+
+    class Meta:
+        model = SkillMain
+        fields = ['skill_name', 'skill_description']
+
 class SkillCategoryModelForm(BSModalModelForm):
     
     class Meta:
@@ -17,6 +23,12 @@ class SkillSubCategoryModelForm(BSModalModelForm):
 
 
 class UserSkillModelForm(forms.models.ModelForm):
+
+    class Meta:
+        model = UserSkill
+        fields = ['user_skill', 'user_skill_category', 'user_skill_sub_category',]
+
+class UserSkillModelFormModal(BSModalModelForm):
 
     class Meta:
         model = UserSkill

@@ -56,6 +56,8 @@ class Skill(models.Model):
     skill_category = models.ManyToManyField(SkillCategory)
     skill_sub_category = models.ManyToManyField(SkillSubCategory)
 
+    class Meta:
+        ordering = ('-skill_name',)
 
     def __str__(self):
         return self.skill_name
@@ -75,6 +77,10 @@ class UserSkill(models.Model):
     user_skill = models.ForeignKey(SkillMain, on_delete=models.CASCADE)
     user_skill_category = models.ManyToManyField(SkillCategory)
     user_skill_sub_category = models.ManyToManyField(SkillSubCategory)
+
+
+    class Meta:
+        ordering = ('-user_skill',)
 
     def get_absolute_url(self):
         return reverse('skills:user_skill_list')

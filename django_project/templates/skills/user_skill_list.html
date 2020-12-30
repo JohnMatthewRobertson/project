@@ -4,14 +4,13 @@
 
 {% block content %}
 
-<div class="container">
+<!-- Modal 2 with id="modal" -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
 
-    <div class="container">
-        <form class="form-inline mt-2 mt-md-0" action="{% url 'skills:search_results' %}" method="get">
-            {% csrf_token %}
-            <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        </form>
-    </div>
 
 {% for item in user_skill_list %}
     <div class="container mt-3">
@@ -28,11 +27,18 @@
             {% for sub_category in item.user_skill_sub_category.all %}
                 <p>{{ sub_category.skill_sub_category }}</p>
             {% endfor %} 
+            <button type="button" id="update-book" class="bs-modal btn btn-sm btn-primary" data-form-url="{% url 'skills:update' item.id %}">
+              <span class="fa fa-pencil"></span>
+            </button>
           </div>
         </div>
     </div>
+    
 {% endfor %}
 
 
 </div>
+
+{% include "pagination.html" with page=page_obj %}
+
 {% endblock content %}
