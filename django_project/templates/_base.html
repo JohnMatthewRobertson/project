@@ -58,7 +58,7 @@
     {% endblock content %}
   </div>
 
-  {% block script %}
+  
  <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -70,6 +70,75 @@
 
 <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 
+
+{% block script %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script>
+
+  var config = {
+    type: 'doughnut',
+    data: { datasets: [{data:{{data|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills'}], labels: {{ labels|safe }}},
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Top 5 Skills',
+            fontSize: 30,
+        }
+    }
+  };
+
+  var config2 = {
+    type: 'horizontalBar',
+    data: {
+      datasets: [{data: {{catdata|safe}},
+        backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skill Category'}], labels: {{ catlabels|safe }}},
+    options: {
+      legend: {display: false,},
+      scales: {xAxes:[{ticks : {beginAtZero : true}}]},
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Top 5 Skills Category',
+            fontSize: 30,
+        }
+    }
+  };
+
+
+  var config3 = {
+    type: 'polarArea',
+    data: {
+      datasets: [{data: {{subdata|safe}},
+        backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skill Sub Category'}], labels: {{ sublabels|safe }}},
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Top 5 Skills Sub Category',
+            fontSize: 30,
+        }
+    }
+  };
+
+  window.onload = function() {
+    var ctx1 = document.getElementById('pie-chart').getContext('2d');
+    window.myPie = new Chart(ctx1, config);
+
+    var ctx2 = document.getElementById('bar-chart').getContext('2d');
+    window.myPie2 = new Chart(ctx2, config2);
+
+    var ctx3 = document.getElementById('polarArea-chart').getContext('2d');
+    window.myPie3 = new Chart(ctx3, config3);
+  }
+
+
+
+</script>
+
+{% endblock script %}
 
   <script type="text/javascript">
     $(document).ready(function() {
@@ -113,15 +182,10 @@
       });
     });
 
-     // Create book button opens form in modal with id="create-modal"
-    $("#create-book").modalForm({
-        formURL: "",
-        modalID: "#create-modal"
-    });
 
   });
 </script>
-{% endblock script%}
+
 
 </body>
 

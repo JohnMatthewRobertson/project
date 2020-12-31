@@ -5,7 +5,16 @@ from django.contrib.auth import get_user_model
 
 # Create your models here.
 
+class PublishedSkillCategoryManager(models.Manager):
+
+    def get_queryset(self):
+        return super(PublishedSkillCategoryManager, self).get_queryset().filter()
+
 class SkillCategory(models.Model):
+
+    objects = models.Manager() # default manager
+    publishedSkillCategory = PublishedSkillCategoryManager() # custom manager
+    
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -18,7 +27,17 @@ class SkillCategory(models.Model):
     def __str__(self):
         return self.skill_category
 
+
+class PublishedSkillSubManager(models.Manager):
+
+    def get_queryset(self):
+        return super(PublishedSkillSubManager, self).get_queryset().filter()
+
 class SkillSubCategory(models.Model):
+
+    objects = models.Manager() # default manager
+    publishedSkillSub = PublishedSkillSubManager() # custom manager
+
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
