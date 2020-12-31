@@ -6,7 +6,7 @@ from skills.models import Skill, SkillCategory, SkillSubCategory, UserSkill, Ski
 from skills.forms import SkillCategoryModelForm, SkillSubCategoryModelForm, SkillMainModelForm, UserSkillModelForm, UserSkillModelFormModal
 from django.views.generic.edit import CreateView, FormView
 from django.urls import reverse_lazy
-from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView
+from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalDeleteView
 
 # Create your views here.
 
@@ -63,9 +63,21 @@ class UserSkillListView(LoginRequiredMixin, ListView):
     login_url = 'account_login'
     paginate_by = 3
 
+    def get_queryset(self):
+        return UserSkill.publishedUserSkill.filter(author=self.request.user)
+
+
+
 class UserSkillUpdateView(BSModalUpdateView):
     model = UserSkill
     template_name = 'skills/skill_update_skill.html'
     form_class = UserSkillModelFormModal
     success_message = 'Success: category update'
+    success_url = reverse_lazy('skills:user_skill_list')
+
+class UserSkillDeleteView(BSModalDeleteView):
+    model = UserSkill
+    context_object_name = 'user'
+    template_name = 'skills/skill_delete_skill.html'
+    success_message = 'Success: Deleted'
     success_url = reverse_lazy('skills:user_skill_list')

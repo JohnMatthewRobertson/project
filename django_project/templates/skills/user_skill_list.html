@@ -17,9 +17,8 @@
         <div class="media border p-3">
           <img src="" alt="" class="mr-3 mt-3 rounded-circle" style="width:60px;">
           <div class="media-body">
-            <h4>{{ item.user_skill.skill_name}}<small><i> Posted on February 19, 2016</i></small></h4>
+            <h4>{{ item.user_skill.skill_name}}<small><i> {{ item.author }}</i></small></h4>
           
-
             {% for category in item.user_skill_category.all %}
                 <p>{{ category.skill_category }}</p>
             {% endfor %}
@@ -27,9 +26,8 @@
             {% for sub_category in item.user_skill_sub_category.all %}
                 <p>{{ sub_category.skill_sub_category }}</p>
             {% endfor %} 
-            <button type="button" id="update-book" class="bs-modal btn btn-sm btn-primary" data-form-url="{% url 'skills:update' item.id %}">
-              <span class="fa fa-pencil"></span>
-            </button>
+            <button type="button" id="update-book" class="bs-modal btn btn-sm btn-primary" data-form-url="{% url 'skills:update' item.id %}"><span class="fa fa-pencil"></span></button>
+            <button type="button" id="delete-book" class="bs-modal btn btn-sm btn-danger" data-form-url="{% url 'skills:delete' item.id %}"><span class="fa fa-trash"></span></button>
           </div>
         </div>
     </div>
@@ -41,4 +39,6 @@
 
 {% include "pagination.html" with page=page_obj %}
 
+
 {% endblock content %}
+

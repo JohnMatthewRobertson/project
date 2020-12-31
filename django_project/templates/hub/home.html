@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load skill_tags %}
 
 {% block title %}
     Home
@@ -9,6 +10,18 @@
 
 <div class="container">
     <h1>Homepage</h1>
+
+    <p>Total Skills {% skill_type_count_tag %}</p>
+
+    <h3>Top Skills</h3>
+            {% total_skill_freq_types as most_commented_posts %}
+            <ul>
+                {%  for post in most_commented_posts %}
+                <li>
+                    <a href="">Skill: {{ post.user_skill__skill_name }} Total Employees wiht this skill: {{ post.count_total}}</a>
+                </li>
+                {% endfor %}
+            </ul>
 
     {% if user.is_authenticated %}
     <h2>Hi {{ user.email }}</h2>

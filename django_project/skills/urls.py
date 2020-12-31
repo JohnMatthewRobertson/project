@@ -14,4 +14,5 @@ urlpatterns = [
     path('user_skill_add/', views.UserSkillCreate.as_view(), name='user_skill_add'),
     path('', views.UserSkillListView.as_view(), name='user_skill_list'),
     path('update/<uuid:pk>', views.UserSkillUpdateView.as_view(), name='update'),
+    path('delete/<uuid:pk>', views.UserSkillDeleteView.as_view(), name='delete'),
 ]

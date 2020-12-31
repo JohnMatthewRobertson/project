@@ -12,7 +12,7 @@ class SkillCategory(models.Model):
         editable=False
     )
 
-    skill_category = models.CharField(max_length=200)
+    skill_category = models.CharField(max_length=200, unique=True)
     skill_category_description = models.CharField(max_length=200)
     
     def __str__(self):
@@ -25,20 +25,32 @@ class SkillSubCategory(models.Model):
         editable=False
     )
     
-    skill_sub_category = models.CharField(max_length=200)
+    skill_sub_category = models.CharField(max_length=200, unique=True)
     skill_sub_category_description = models.CharField(max_length=200)
 
     def __str__(self):
         return self.skill_sub_category
 
+
+class PublishedSkillManager(models.Manager):
+
+    def get_queryset(self):
+        return super(PublishedSkillManager, self).get_queryset().filter()
+
+
 class SkillMain(models.Model):
+
+
+    objects = models.Manager() # default manager
+    publishedSkill = PublishedSkillManager() # custom manager
+
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
         editable=False
     )
     
-    skill_name = models.CharField(max_length=200)
+    skill_name = models.CharField(max_length=200, unique=True)
     skill_description = models.CharField(max_length=300)
 
     def __str__(self):
@@ -65,7 +77,17 @@ class Skill(models.Model):
     def get_absolute_url(self):
         return reverse('skills:skill_detail', args=[str(self.id)])
 
+class PublishedUserSkillManager(models.Manager):
+
+    def get_queryset(self):
+        return super(PublishedUserSkillManager, self).get_queryset().filter()
+
 class UserSkill(models.Model):
+
+    
+    objects = models.Manager() # default manager
+    publishedUserSkill = PublishedUserSkillManager() # custom manager
+
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -81,6 +103,7 @@ class UserSkill(models.Model):
 
     class Meta:
         ordering = ('-user_skill',)
+        unique_together = ('author', 'user_skill',)
 
     def get_absolute_url(self):
         return reverse('skills:user_skill_list')

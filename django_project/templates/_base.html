@@ -5,7 +5,8 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
   <title>{% block title %}Hub Home{% endblock title %}</title>
 </head>
 
@@ -48,6 +49,8 @@
 
 {% endblock navbar %}
  
+
+
   
   <div >
     {% block content %}
@@ -55,14 +58,15 @@
     {% endblock content %}
   </div>
 
+  {% block script %}
  <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<!-- Latest compiled JavaScript -->
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 
@@ -98,7 +102,6 @@
   });
   </script>
 
-
 <script type="text/javascript">
   $(function () {
 
@@ -110,8 +113,15 @@
       });
     });
 
+     // Create book button opens form in modal with id="create-modal"
+    $("#create-book").modalForm({
+        formURL: "",
+        modalID: "#create-modal"
+    });
+
   });
 </script>
+{% endblock script%}
 
 </body>
 
