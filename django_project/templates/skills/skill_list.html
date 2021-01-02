@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container mt-3">
     <form class="form-inline mt-2 mt-md-0" action="{% url 'skills:search_results' %}" method="get">
         {% csrf_token %}
         <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -12,18 +12,24 @@
 </div>
 
 {% for skill in skill_list %}
+
+{% for item in skill %}
+{{ item }}
+{% endfor %}
 <div class="container">
     <h2>
-        <a href="{{ skill.get_absolute_url }}">{{ skill.skill_name }}</a>  
+        <a href="">{{ skill.user_skill }}</a>  
     </h2>
     <h6>
-        {% for category in skill.skill_category.all %}
+        {% for category in skill.user_skill_category.all %}
         <p>{{ category.skill_category }}</p>
+        <p>{{ category.skill_category_description }}</p>
     {% endfor %}
     </h6>
     <h6>
-    {% for sub_category in skill.skill_sub_category.all %}
+    {% for sub_category in skill.user_skill_sub_category.all %}
         <p>{{ sub_category.skill_sub_category }}</p>
+        <p>{{ sub_category.skill_sub_category_description }}</p>
     {% endfor %}
     </h6>
 </div>

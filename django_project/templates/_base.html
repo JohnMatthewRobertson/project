@@ -24,7 +24,7 @@
       <a class="nav-link" href="{% url 'hub:hub_home' %}"> Home</a>
     </li>
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> Skills Options</a>
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> User Skills Options</a>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="{% url 'skills:user_skill_list' %}">Skill list</a>
         <a class="dropdown-item" href="{% url 'skills:user_skill_add' %}">Add Skill</a>
@@ -73,7 +73,7 @@
 <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 
 
-{% block script %}
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
@@ -140,7 +140,7 @@
 
 </script>
 
-{% endblock script %}
+
 
   <script type="text/javascript">
     $(document).ready(function() {

@@ -14,9 +14,10 @@
     <div class="modal-body">
       {% for field in form %}
         <div class="form-group{% if field.errors %} invalid{% endif %}">
-          {{ field|as_crispy_field }}
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
           {% for error in field.errors %}
-            <p class="help-block">{{ error|as_crispy_field }}</p>
+            <p class="help-block">{{ error }}</p>
           {% endfor %}
         </div>
       {% endfor %}
@@ -24,7 +25,7 @@
   
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-outline-danger">Create</button>
+      <button type="button" class="submit-btn btn btn-outline-danger">Create</button>
     </div>
   
   </form>
