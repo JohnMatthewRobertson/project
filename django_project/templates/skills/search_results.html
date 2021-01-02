@@ -5,14 +5,32 @@
 {% block content %}
 <div class="container">
 <h1>Search Results</h1>
-{% for skill in skill_list %}
-<div>
-    <h3><a href="{{ skill.get_absolute_url }}">{{ skill.skill_name }}</a></h3>
-    <p>Skill:{{ skill.skill_name }}</p>
-    <p>Description: {{ skill.skill_description }}</p>
-</div>
 
+{% for item in user_skill_list %}
+    <div class="container mt-3">
+        <div class="media border p-3">
+          <img src="" alt="" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+          <div class="media-body">
+            <h4>{{ item.user_skill.skill_name}}</h4>
+          
+            {% for category in item.user_skill_category.all %}
+                <p>{{ category.skill_category }}</p>
+            {% endfor %}
+     
+            {% for sub_category in item.user_skill_sub_category.all %}
+                <p>{{ sub_category.skill_sub_category }}</p>
+            {% endfor %} 
+
+            <p>Active: {{ item.active }}</p>
+            <p>Teach: {{ item.teach }}</p>
+            <p><small><i> {{ item.author }}</i></small></p>
+          </div>
+        </div>
+    </div>
+    
 {% endfor %}
+
+
 </div>
 
 {% endblock %}

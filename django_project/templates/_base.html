@@ -23,11 +23,14 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'hub:hub_home' %}"> Home</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'skills:skill_list' %}"> Skill List</a>
+    </li>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> User Skills Options</a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="{% url 'skills:user_skill_list' %}">Skill list</a>
-        <a class="dropdown-item" href="{% url 'skills:user_skill_add' %}">Add Skill</a>
+        <a class="dropdown-item" href="{% url 'skills:user_skill_list' %}">User Skill list</a>
+        <a class="dropdown-item" href="{% url 'skills:user_skill_add' %}">User Add Skill</a>
       </div>
     </li>
     <li class="nav-item">

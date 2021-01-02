@@ -12,14 +12,11 @@ from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, 
 
 class SkillListView(LoginRequiredMixin, ListView):
     model = UserSkill
-    context_object_name = 'skill_list'
+    context_object_name = 'user_skill_list'
     template_name = 'skills/skill_list.html'
     login_url = 'account_login'
+    paginate_by = 10
 
-    def get_queryset(self):
-        p = UserSkill.objects.all().values('user_skill_id', 'user_skill__skill_name', 'user_skill_category__skill_category').distinct()
-        print(p)
-        return UserSkill.publishedUserSkill.order_by().values_list('user_skill_id', 'user_skill__skill_name', 'user_skill_category', 'user_skill_category__skill_category', 'user_skill_sub_category', 'user_skill_sub_category__skill_sub_category').distinct()
 
 
 '''
@@ -32,13 +29,54 @@ class SkillDetailView(LoginRequiredMixin, DetailView):
 
 class SearchResultsListView(ListView):
     model = UserSkill
-    context_object_name = 'skill_list'
+    context_object_name = 'user_skill_list'
     template_name = 'skills/search_results.html'
 
     def get_queryset(self):
+
+        result_list = []
+
         query = self.request.GET.get('q')
-        return UserSkill.objects.filter(
-            Q(skill_name__icontains=query) | Q(skill_category__skill_category__icontains=query))
+
+        print(query)
+
+        skill = UserSkill.objects.filter(Q(user_skill__skill_name__icontains=query))
+        if skill:
+            skill_query = Q(user_skill__skill_name__icontains=query)
+            result_list.append(skill_query) 
+        print("SKILL", skill)
+
+        category = UserSkill.objects.filter(Q(user_skill_category__skill_category__icontains=query))
+        print("CAT", category)
+        if category:
+            category_query = Q(user_skill_category__skill_category__icontains=query)
+            result_list.append(category_query) 
+
+        subcat = UserSkill.objects.filter(Q(user_skill_sub_category__skill_sub_category__icontains=query))
+        print("SUB", subcat)
+        if subcat:
+            sub_query = Q(user_skill_sub_category__skill_sub_category__icontains=query)
+            result_list.append(sub_query)
+
+        print("LIST", result_list)
+
+        for item in result_list:
+            print(type(item))
+            
+        print(len(result_list))
+
+        if len(result_list) == 1:
+            return UserSkill.objects.filter(result_list[0]).distinct()
+        elif len(result_list) == 2:
+            return UserSkill.objects.filter(result_list[0] | result_list[1]).distinct()
+        elif len(result_list) == 3:
+            return UserSkill.objects.filter(result_list[0] | result_list[1] | result_list[2]).distinct()
+        else:
+            return UserSkill.objects.none()
+
+        #print("TEST", UserSkill.objects.filter(Q(user_skill_category__skill_category__icontains=query) & Q(user_skill_sub_category__skill_sub_category__icontains=query)))
+
+        #return UserSkill.objects.filter(Q(user_skill_category__skill_category__icontains=query) | Q(user_skill_sub_category__skill_sub_category__icontains=query)).distinct()
 
 
 class SkillCreateView(BSModalCreateView):
