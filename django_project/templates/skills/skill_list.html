@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-
+{% load static %}
 {% block title %}Skills{% endblock title %}
 
 {% block content %}
@@ -7,7 +7,8 @@
 <div class="container mt-3">
     <form class="form-inline mt-2 mt-md-0" action="{% url 'skills:search_results' %}" method="get">
         {% csrf_token %}
-        <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search skill, cat, sub" aria-label="Search">
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
 
@@ -16,19 +17,32 @@
         <div class="media border p-3">
           <img src="" alt="" class="mr-3 mt-3 rounded-circle" style="width:60px;">
           <div class="media-body">
-            <h4>{{ item.user_skill.skill_name}}</h4>
+        
+            
+            <h4>Skill: </h4>
+            <h2><span class="badge badge-primary">{{ item.user_skill.skill_name}}</span></h2>
           
+            <h5>Category: </h5>
             {% for category in item.user_skill_category.all %}
-                <p>{{ category.skill_category }}</p>
+                <h3><span class="badge badge-info">{{ category.skill_category }}</span></h3>
             {% endfor %}
      
+            <h6>Sub Category: </h6>
+        
             {% for sub_category in item.user_skill_sub_category.all %}
-                <p>{{ sub_category.skill_sub_category }}</p>
+                <h2><span class="badge badge-secondary">{{ sub_category.skill_sub_category }}</span></h2>
             {% endfor %} 
-
-            <p>Active: {{ item.active }}</p>
-            <p>Teach: {{ item.teach }}</p>
-            <p><small><i> {{ item.author }}</i></small></p>
+           
+            <div class="media p-3">
+                <img src="{% static 'images/profile.png' %}" alt="profile" class="mr-3 mt-3 rounded-circle" style="width:45px;">
+                <div class="media-body">
+                  <h4>Name: {{ item.author.username}}</h4>
+                  <p><small><i>Updated: {{ item.updated}}</i></small></p>
+                  <p><i>Email: {{ item.author.email }}</i></p>
+                </div>
+              </div>  
+          
+    
           </div>
         </div>
     </div>
@@ -41,4 +55,4 @@
 {% include "pagination.html" with page=page_obj %}
 
 
-{% endblock content %}
+{% endblock %}

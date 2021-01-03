@@ -6,7 +6,12 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style> 
+    body {
+        padding-top: 60px;
+    }
+</style>
   <title>{% block title %}Hub Home{% endblock title %}</title>
 </head>
 
@@ -15,7 +20,7 @@
 
 {% block navbar %}
 <!-- A grey horizontal navbar that becomes vertical on small screens -->
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
   <a class="navbar-brand" href="#"> WebSiteName</a>
 
   <!-- Links -->

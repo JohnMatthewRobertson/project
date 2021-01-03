@@ -157,3 +157,49 @@ python manage.py test functional_tests.<test name>
 to collect static content for production 
 
 python manage.py collectstatic
+
+### docker commands
+
+create Dockerfile
+
+then 
+
+docker build .
+
+create docker-compose.yml
+
+then 
+
+docker-compose up
+
+stopped with control+c
+
+or run in detach mode
+
+docker-compose up -d
+
+stopped with docker-compose down
+
+then to issue django commands on docker container
+
+container must be running 
+
+docker-compose exec web python manage.py createsuperuser
+
+docker-compose exec web python -m pip install --upgrade pip
+
+then for install to take affect
+
+docker-compose down
+
+docker-compose up -d --build
+
+#### check docker logs
+
+docker-compose logs
+
+#### docker database POSTgres
+
+docker-compose exec web python /code/django_project/manage.py migrate
+
+docker-compose exec web python /code/django_project/manage.py createsuperuser

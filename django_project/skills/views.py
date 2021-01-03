@@ -31,6 +31,7 @@ class SearchResultsListView(ListView):
     model = UserSkill
     context_object_name = 'user_skill_list'
     template_name = 'skills/search_results.html'
+    paginate_by = 10
 
     def get_queryset(self):
 
