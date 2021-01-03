@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-import os
+import os, dj_database_url
 from dotenv import load_dotenv
 
 # default imports
@@ -33,9 +33,9 @@ load_dotenv(os.path.join(basedir, '.env'))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', default='')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
+DEBUG = False
 # changed hardcoded debug true to environment variable
-DEBUG = os.environ.get('DJANGO_DEBUG', default=False)
+#DEBUG = os.environ.get('DJANGO_DEBUG', default=False)
 
 
 # changed hardcoded allowed_hosts environment variable
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth.account',
     'bootstrap_modal_forms',
+    'whitenoise.runserver_nostatic', # new
 ]
 
 # django crispy forms setting
@@ -78,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # new
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -114,6 +116,7 @@ DATABASES = {
 }
 '''
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -122,6 +125,11 @@ DATABASES = {
         'HOST': 'db',
         'PORT': '5432'
     }
+}
+'''
+
+DATABASES = {
+    "default": dj_database_url.config("DATABASE_URL", default="postgres://postgres@db/postgres")
 }
 
 
@@ -206,3 +214,6 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_HOST = os.environ.get("EMAIL_HOST")
 EMAIL_PORT = os.environ.get("EMAIL_PORT")
 EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # new

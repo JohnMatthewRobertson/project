@@ -200,6 +200,33 @@ docker-compose logs
 
 #### docker database POSTgres
 
+docker-compose exec web python /code/django_project/manage.py makemigrations
+
 docker-compose exec web python /code/django_project/manage.py migrate
 
 docker-compose exec web python /code/django_project/manage.py createsuperuser
+
+docker-compose exec web python /code/django_project/manage.py test
+
+docker-compose exec web rm -r /code/django_project/skills/migrations
+
+docker volume ls
+
+docker volume rm project_postgres_data
+
+#### static files docker
+
+docker-compose exec web python /code/django_project/manage.py collectstatic
+
+#### creating app and projects on docker
+
+docker-compose exec web python /code/django_project/manage.py startapp 
+
+#### 
+
+-f flag to use a different alt compose file
+
+docker-compose -f docker-compose-prod.yml up -d --build
+
+
+docker exec project env
