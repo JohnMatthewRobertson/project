@@ -3,10 +3,14 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from skills.models import SkillCategory, SkillSubCategory, UserSkill, SkillMain
-from skills.forms import SkillCategoryModelForm, SkillSubCategoryModelForm, SkillMainModelForm, UserSkillModelForm, UserSkillModelFormModal, UserSkillCreateModelForm
-from django.views.generic.edit import CreateView, FormView
+from skills.forms import SkillCategoryModelForm, SkillSubCategoryModelForm, SkillMainModelForm, UserSkillModelForm, UserSkillModelFormModal, UserSkillCreateModelForm, UserSkillAuthorModelForm
+from django.views.generic.edit import CreateView, FormView, FormMixin
 from django.urls import reverse_lazy, reverse
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalDeleteView
+from django.views import View
+import operator
+from django.db.models import Count
+from functools import reduce
 
 # Create your views here.
 
@@ -45,26 +49,26 @@ class SearchResultsListView(ListView):
         if skill:
             skill_query = Q(user_skill__skill_name__icontains=query)
             result_list.append(skill_query) 
-        print("SKILL", skill)
+        #print("SKILL", skill)
 
         category = UserSkill.objects.filter(Q(user_skill_category__skill_category__icontains=query))
-        print("CAT", category)
+        #print("CAT", category)
         if category:
             category_query = Q(user_skill_category__skill_category__icontains=query)
             result_list.append(category_query) 
 
         subcat = UserSkill.objects.filter(Q(user_skill_sub_category__skill_sub_category__icontains=query))
-        print("SUB", subcat)
+        #print("SUB", subcat)
         if subcat:
             sub_query = Q(user_skill_sub_category__skill_sub_category__icontains=query)
             result_list.append(sub_query)
 
-        print("LIST", result_list)
+        #p#rint("LIST", result_list)
 
-        for item in result_list:
-            print(type(item))
+        #for item in result_list:
+            #print(type(item))
             
-        print(len(result_list))
+        #print(len(result_list))
 
         if len(result_list) == 1:
             return UserSkill.objects.filter(result_list[0]).distinct()
@@ -140,3 +144,83 @@ class UserSkillDeleteView(BSModalDeleteView):
     template_name = 'skills/skill_delete_skill.html'
     success_message = 'Success: Deleted'
     success_url = reverse_lazy('skills:user_skill_list')
+
+class TeamSkillView(LoginRequiredMixin, View):
+    model = UserSkill
+    login_url = 'account_login'
+    context_object_name = 'user_skill_list'
+    template_name = 'skills/team_skill.html'
+
+    def get(self,request, *args, **kwargs):
+        form = UserSkillAuthorModelForm()
+        return render(request, self.template_name, {'form': form})
+
+'''
+class TeamSearchResultsListView(ListView):
+    model = UserSkill
+    template_name = 'skills/team_search_results.html'
+
+    def get_queryset(self, *args, **kwargs):
+
+        data = self.request.GET.getlist('team')
+        print(data)
+
+        for item in data:
+            print(type(int(item)))
+
+        
+        #return UserSkill.objects.filter(author_id=2)
+        #return UserSkill.objects.filter(reduce(operator.and_,(Q(author_id__in=x) for x in data)))
+        return UserSkill.objects.filter(author_id__in=data)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(TeamSearchResultsListView, self).get_context_data(*args, **kwargs)
+        
+        labels = []
+        data = []
+        pie_chart = UserSkill.publishedUserSkill.all().values('user_skill', 'user_skill__skill_name').annotate(count_total = Count('user_skill')).order_by('-count_total')[:5]
+
+        for item in pie_chart:
+            labels.append(item['user_skill__skill_name'])
+            data.append(item['count_total'])
+
+        context['label'] = labels{'labels' : labels, 'data': data}    
+
+        return data
+'''
+
+
+class TeamSearchResultsListView(View):
+
+    context_object_name = 'user_skill_list'
+  
+    def get(self, request):
+
+        print("john")
+
+        data = self.request.GET.getlist('team')
+        print(data)
+
+        for item in data:
+            print(type(int(item)))
+
+        
+        #return UserSkill.objects.filter(author_id=2)
+        #return UserSkill.objects.filter(reduce(operator.and_,(Q(author_id__in=x) for x in data)))
+        q =  UserSkill.objects.filter(author_id__in=data)
+
+        labels = []
+        data = []
+
+        pie_chart = UserSkill.publishedUserSkill.values('user_skill', 'user_skill__skill_name').annotate(count_total = Count('user_skill')).order_by('-count_total')
+
+        for item in pie_chart:
+            print(item)
+            labels.append(item['user_skill__skill_name'])
+            print(item['user_skill__skill_name'])
+            data.append(item['count_total'])
+            print(item['count_total'])
+
+        return render(request, 'skills/team_search_results.html', {'labels' : labels, 'data': data, 'q': q})
+       
+

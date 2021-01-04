@@ -1,0 +1,79 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+<div class="container">
+<h1>Search Results</h1>
+
+{% for item in q %}
+    <div class="container mt-3">
+        <div class="media border p-3">
+          <img src="" alt="" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+          <div class="media-body">
+
+            <h4>Skill: </h4>
+            <h2><span class="badge badge-primary">{{ item.user_skill.skill_name}}</span></h2>
+            
+            <h5>Category: </h5>
+            {% for category in item.user_skill_category.all %}
+                <h3><span class="badge badge-info">{{ category.skill_category }}</span></h3>
+            {% endfor %}
+
+            <h6>Sub Category: </h6>
+            {% for sub_category in item.user_skill_sub_category.all %}
+                <h2><span class="badge badge-secondary">{{ sub_category.skill_sub_category }}</span></h2>
+            {% endfor %} 
+
+            <div class="media p-3">
+              <img src="{% static 'images/profile.png' %}" alt="profile" class="mr-3 mt-3 rounded-circle" style="width:45px;">
+              <div class="media-body">
+                <h4>Name: {{ item.author.username}}</h4>
+                <p><small><i>Updated: {{ item.updated}}  Skill Active: {{ item.active }}</i></small></p>
+                <p><small><i>Skill Active: {{ item.active }} Teach Skill: {{ item.teach }}</i></small></p>
+                <p><i>Email: {{ item.author.email }}</i></p>
+              </div>
+            </div>  
+          </div>
+        </div>
+    </div>
+    
+{% endfor %}
+
+
+<div id="container mt-5 mb-5">
+  <canvas id="pie-chart1"></canvas>
+</div>
+
+
+</div>
+
+<script>
+
+  var config = {
+    type: 'doughnut',
+    data: { datasets: [{data:{{data|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills'}], labels: {{ labels|safe }}},
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Top 5 Skills',
+            fontSize: 30,
+        }
+    }
+  };
+
+
+
+  window.onload = function() {
+    var ctx1 = document.getElementById('pie-chart1').getContext('2d');
+    window.myPie = new Chart(ctx1, config);
+
+  }
+
+
+
+</script>
+
+{% endblock %}
+

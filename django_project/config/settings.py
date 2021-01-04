@@ -33,9 +33,9 @@ load_dotenv(os.path.join(basedir, '.env'))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', default='')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+#DEBUG = False
 # changed hardcoded debug true to environment variable
-#DEBUG = os.environ.get('DJANGO_DEBUG', default=False)
+DEBUG = os.environ.get('DJANGO_DEBUG', default=False)
 
 
 # changed hardcoded allowed_hosts environment variable
@@ -106,15 +106,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-'''
-sqlite
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-'''
+
 
 '''
 DATABASES = {
@@ -127,11 +126,11 @@ DATABASES = {
     }
 }
 '''
-
+'''
 DATABASES = {
     "default": dj_database_url.config("DATABASE_URL", default="postgres://postgres@db/postgres")
 }
-
+'''
 
 
 # Password validation

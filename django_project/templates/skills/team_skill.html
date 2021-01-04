@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}User Skills{% endblock title %}
+
+{% block content %}
+
+<form method="get" action="{% url 'skills:team_search_results' %}">{% csrf_token %}
+
+    {{ form }}
+
+<button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+
+
+{% endblock content %}
+
+

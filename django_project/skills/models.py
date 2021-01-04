@@ -144,3 +144,6 @@ class UserSkill(models.Model):
 
     def get_absolute_url(self):
         return reverse('skills:user_skill_list')
+
+    def __str__(self):
+        return self.author
