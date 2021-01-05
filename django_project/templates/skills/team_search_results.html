@@ -3,9 +3,98 @@
 {% block title %}Search{% endblock title %}
 
 {% block content %}
-<div class="container">
-<h1>Search Results</h1>
 
+<div class="container mt-5 mb-5">
+
+
+  <div class="container mt-5 mb-5">
+    <div class="jumbotron">
+        <h1 class="d-flex justify-content-center">Team Search Results</h1>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5">
+  <h3 class="d-flex justify-content-center">Team Skills</h3>
+  <table class="table">
+      <thead>
+          <tr>
+            <th>Skill</th>
+            <th>Total team members with this skill</th>
+            <th>Total team members</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      {% for post in skilltable %}
+      <tr>
+          <td>{{ post.user_skill__skill_name }}</td>
+          <td>{{ post.count_total}}</td>
+          <td>{{ teamCount }}</td>
+        </tr>   
+      {% endfor %}
+  </tbody>
+  </table>
+</div>
+
+
+
+<div class="container mt-5 mb-5">
+  <canvas id="polar-chart-skill"></canvas>
+</div>
+
+<div class="container mt-5 mb-5">
+<h3 class="d-flex justify-content-center">Team Skill Category</h3>
+<table class="table">
+    <thead>
+        <tr>
+          <th>Skill Cateogory</th>
+          <th>Total team members with this skill category</th>
+          <th>Total team members</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    {% for post in skillCattable %}
+    <tr>
+        <td>{{ post.user_skill_category__skill_category }}</td>
+        <td>{{ post.count_total}}</td>
+        <td>{{ teamCount }}</td>
+      </tr>   
+    {% endfor %}
+</tbody>
+</table>
+</div>
+
+<div class="container mt-5 mb-5">
+  <canvas id="polar-chart-skill-category"></canvas>
+</div>
+
+
+<div class="container mt-5 mb-5">
+<h3 class="d-flex justify-content-center">Team Skill Sub Category</h3>
+<table class="table">
+    <thead>
+        <tr>
+          <th>Skill Sub Cateogory</th>
+          <th>Total team members with this skill</th>
+          <th>Total team members</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    {% for post in skillSubCattable %}
+    <tr>
+        <td>{{ post.user_skill_sub_category__skill_sub_category }}</td>
+        <td>{{ post.count_total}}</td>
+        <td>{{ teamCount }}</td>
+      </tr>   
+    {% endfor %}
+</tbody>
+</table>
+</div>
+
+<div class="container mt-5 mb-5">
+  <canvas id="polar-chart-skill-sub-category"></canvas>
+</div>
+
+<div class="container mt-5 mb-5">
 {% for item in q %}
     <div class="container mt-3">
         <div class="media border p-3">
@@ -39,25 +128,47 @@
     </div>
     
 {% endfor %}
-
-
-<div id="container mt-5 mb-5">
-  <canvas id="pie-chart1"></canvas>
 </div>
-
 
 </div>
 
 <script>
 
-  var config = {
-    type: 'doughnut',
+  var config4 = {
+    type: 'polarArea',
     data: { datasets: [{data:{{data|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills'}], labels: {{ labels|safe }}},
     options: {
       responsive: true,
       title: {
             display: true,
-            text: 'Top 5 Skills',
+            text: 'Team Skills',
+            fontSize: 30,
+        }
+    }
+  };
+
+
+  var config5 = {
+    type: 'polarArea',
+    data: { datasets: [{data:{{catdata|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills Cat'}], labels: {{ catlabels|safe }}},
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Team Skill Category',
+            fontSize: 30,
+        }
+    }
+  };
+
+  var config6 = {
+    type: 'polarArea',
+    data: { datasets: [{data:{{sub_data|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills Cat'}], labels: {{ sub_labels|safe }}},
+    options: {
+      responsive: true,
+      title: {
+            display: true,
+            text: 'Team Skill Sub Category',
             fontSize: 30,
         }
     }
@@ -65,9 +176,17 @@
 
 
 
+
   window.onload = function() {
-    var ctx1 = document.getElementById('pie-chart1').getContext('2d');
-    window.myPie = new Chart(ctx1, config);
+    var ctx4 = document.getElementById('polar-chart-skill').getContext('2d');
+    window.myPie4 = new Chart(ctx4, config4);
+
+    var ctx5 = document.getElementById('polar-chart-skill-category').getContext('2d');
+    window.myPie5 = new Chart(ctx5, config5);
+
+    var ctx6 = document.getElementById('polar-chart-skill-sub-category').getContext('2d');
+    window.myPie6 = new Chart(ctx6, config6);
+
 
   }
 

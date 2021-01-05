@@ -1,18 +1,29 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
+
+
 {% block title %}User Skills{% endblock title %}
 
 {% block content %}
 
-<form method="get" action="{% url 'skills:team_search_results' %}">{% csrf_token %}
+<div class="container">
 
-    {{ form }}
+    <div class="container mt-5 mb-5">
+        <div class="jumbotron">
+            <h1 class="d-flex justify-content-center">Team Skill</h1>
+        </div>
+    </div>
 
-<button type="submit" class="btn btn-primary">Submit</button>
+<div class="container mt-5 mb-5">
+    <h3 class="d-flex justify-content-center mt-5 mb-5">Multiple select list (hold ctrl or shift (or drag with the mouse) to select more than one)</h3>
+    <form method="get" action="{% url 'skills:team_search_results' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 
-</form>
-
-
+</div>
 
 {% endblock content %}
 

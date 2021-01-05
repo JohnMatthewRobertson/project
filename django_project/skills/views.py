@@ -196,13 +196,13 @@ class TeamSearchResultsListView(View):
   
     def get(self, request):
 
-        print("john")
+        #print("john")
 
         data = self.request.GET.getlist('team')
-        print(data)
+        #print(data)
 
-        for item in data:
-            print(type(int(item)))
+        #for item in data:
+         #   print(type(int(item)))
 
         
         #return UserSkill.objects.filter(author_id=2)
@@ -212,15 +212,34 @@ class TeamSearchResultsListView(View):
         labels = []
         data = []
 
-        pie_chart = UserSkill.publishedUserSkill.values('user_skill', 'user_skill__skill_name').annotate(count_total = Count('user_skill')).order_by('-count_total')
+        #pie_chart = UserSkill.publishedUserSkill.values('user_skill', 'user_skill__skill_name').annotate(count_total = Count('user_skill')).order_by('-count_total')
+        pie_chart = q.values('user_skill', 'user_skill__skill_name').annotate(count_total = Count('user_skill')).order_by('-count_total')
 
         for item in pie_chart:
-            print(item)
             labels.append(item['user_skill__skill_name'])
-            print(item['user_skill__skill_name'])
             data.append(item['count_total'])
-            print(item['count_total'])
 
-        return render(request, 'skills/team_search_results.html', {'labels' : labels, 'data': data, 'q': q})
+        cat_labels = []
+        cat_data = []
+        cat_chart = q.values('user_skill_category', 'user_skill_category__skill_category').annotate(count_total = Count('user_skill_category')).order_by('-count_total')
+
+        for item in cat_chart:
+            cat_labels.append(item['user_skill_category__skill_category'])
+            cat_data.append(item['count_total'])
+
+        sub_labels = []
+        sub_data = []
+        sub_chart = q.values('user_skill_sub_category', 'user_skill_sub_category__skill_sub_category').annotate(count_total = Count('user_skill_sub_category')).order_by('-count_total')
+
+        for item in sub_chart:
+            
+            sub_labels.append(item['user_skill_sub_category__skill_sub_category'])
+           
+            sub_data.append(item['count_total'])
+
+        team_count =  q.values('author_id').distinct().count()
+
+        return render(request, 'skills/team_search_results.html', {'labels' : labels, 'data': data, 'catlabels' : cat_labels, 'catdata': cat_data, 'sub_labels': sub_labels, 'sub_data': sub_data,  'q': q, 'skilltable': pie_chart, 'skillCattable': cat_chart, 'skillSubCattable': sub_chart, 'teamCount': team_count })
+       
        
 
