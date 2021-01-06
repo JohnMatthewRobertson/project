@@ -230,3 +230,7 @@ docker-compose -f docker-compose-prod.yml up -d --build
 
 
 docker exec project env
+
+#### acccess docker files
+
+docker exec -t -i mycontainer /bin/bash
