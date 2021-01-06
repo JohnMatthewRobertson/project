@@ -248,11 +248,11 @@ heroku create
 
 set environment variables 
 
-heroku stack:set container -a vast-brushlands-20101
+heroku stack:set container -a intense-plains-14836
 
-heroku addons:create heroku-postgresql:hobby-dev -a vast-brushlands-20101
+heroku addons:create heroku-postgresql:hobby-dev -a intense-plains-14836
 
-heroku git:remote -a vast-brushlands-20101
+heroku git:remote -a intense-plains-14836
 
 git push heroku main
 
