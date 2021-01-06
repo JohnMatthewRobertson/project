@@ -257,3 +257,5 @@ heroku git:remote -a intense-plains-14836
 git push heroku main
 
 heroku run python /code/django_project/manage.py migrate
+
+heroku run python /code/django_project/manage.py createsuperuser

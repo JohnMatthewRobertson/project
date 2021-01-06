@@ -32,6 +32,7 @@ class UserSkillModelForm(forms.models.ModelForm):
 
 class UserSkillAuthorModelForm(forms.Form):
     names = UserSkill.objects.values_list('author_id', 'author__username').distinct().order_by()
+    print(names)
     
     team = forms.MultipleChoiceField(
         choices=names,
