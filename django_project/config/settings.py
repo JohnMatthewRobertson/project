@@ -39,10 +39,10 @@ env.read_env()
 SECRET_KEY = env('DJANGO_SECRET_KEY', default='')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
+DEBUG = False
 # changed hardcoded debug true to environment variable
 #DEBUG = os.environ.get('DJANGO_DEBUG', default=False)
-DEBUG = env.bool('DJANGO_DEBUG', default=False)
+#DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 
 # changed hardcoded allowed_hosts environment variable
@@ -123,7 +123,7 @@ DATABASES = {
 }
 '''
 
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -134,7 +134,7 @@ DATABASES = {
     }
 }
 
-
+'''
 
 '''
 DATABASES = {
@@ -147,6 +147,17 @@ DATABASES = {
     "default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
 }
 '''
+
+'''
+DATABASES = {
+    "default": env.dj_db_url("DATABASE_URL")
+}
+'''
+
+DATABASES = {
+    "default": env.dj_db_url("DATABASE_URL")
+}
+
 
 
 # Password validation
@@ -234,8 +245,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_PORT = env("EMAIL_PORT")
-EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+#EMAIL_PORT = env("EMAIL_PORT")
+#EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # new

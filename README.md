@@ -240,3 +240,20 @@ docker exec -tiu postgres project_db_1 psql
 \l for databases
 
 \dt tables
+
+
+#### horoku
+
+heroku create
+
+set environment variables 
+
+heroku stack:set container -a vast-brushlands-20101
+
+heroku addons:create heroku-postgresql:hobby-dev -a vast-brushlands-20101
+
+heroku git:remote -a vast-brushlands-20101
+
+git push heroku main
+
+heroku run python /code/django_project/manage.py migrate
