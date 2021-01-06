@@ -234,3 +234,9 @@ docker exec project env
 #### acccess docker files
 
 docker exec -t -i mycontainer /bin/bash
+
+docker exec -tiu postgres project_db_1 psql
+
+\l for databases
+
+\dt tables

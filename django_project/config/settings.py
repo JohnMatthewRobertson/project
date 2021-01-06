@@ -50,7 +50,7 @@ DEBUG = env.bool('DJANGO_DEBUG', default=False)
 #ALLOWED_HOSTS = []
 #ALLOWED_HOSTS = [env['DJANGO_HOSTS']]
 #ALLOWED_HOSTS = [os.environ.get['DJANGO_HOSTS']]
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*',]
 
 # Application definition
 
