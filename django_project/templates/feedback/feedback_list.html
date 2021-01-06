@@ -1,0 +1,60 @@
+{% extends '_base.html' %}
+{% load feedback_tags %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    FeedBack
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="container mt-5 mb-5">
+        <div class="jumbotron">
+            <h1 class="d-flex justify-content-center">Feedback</h1>
+        </div>
+    </div>
+    
+    <div class="container mt-5 mb-5">
+    <form action="{% url 'feedback:new_feedback' %}" method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+
+   
+<div class="container mt-5 mb-5">
+
+    <h1 class="d-flex justify-content-center">Feed Back Recieved</h1>
+
+    <p class="d-flex justify-content-center">Total messages {% feedback_message_count_tag %}</p>
+    
+    {% for msg in feedback_list %}
+        
+        <div class="container mt-3">  
+            <div class="media border p-3">    
+            <div class="media p-3">
+              <img src="{% static 'images/profile.png' %}" alt="profile" class="mr-3 mt-3 rounded-circle" style="width:45px;">
+              <div class="media-body">
+                <h4>Name: {{ msg.author}}</h4>
+                <p><small><i>Posted: {{ msg.created }}</i></small></p>
+                <p><i>Email: {{ msg.author.email }}</i></p>
+                <p class="card-text"><span style="font-weight:bold">Message: </span> {{ msg.message }}</p>
+              </div>
+            </div>  
+        </div>   
+          </div>
+
+
+    {% endfor%}
+
+</div>
+
+{% include "pagination.html" with page=page_obj %}
+
+</div>
+
+{% endblock %}

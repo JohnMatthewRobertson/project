@@ -1,0 +1,173 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load skill_tags %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="container mt-5 mb-5">
+        <div class="jumbotron">
+            <h1 class="d-flex justify-content-center">Home</h1>
+        </div>
+    </div>
+
+    <h3 class="d-flex justify-content-center">Top 5 Skills out of a total of  {% skill_type_count_tag %} skills</h3>
+            {% total_skill_freq_types as most_commented_posts %}
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th>Skill</th>
+                      <th>Total Employees with this skill</th>
+                      <th>Total Employees</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                {%  for post in most_commented_posts %}
+                <tr>
+                    <td>{{ post.user_skill__skill_name }}</td>
+                    <td>{{ post.count_total}}</td>
+                    <td>{% total_users %}</td>
+                  </tr>   
+                {% endfor %}
+        </tbody>
+        </table>
+
+        
+        <div id="container mt-5 mb-5">
+            <canvas id="pie-chart"></canvas>
+        </div>
+
+
+
+            <div class="container mt-5 mb-5">
+        <h3 class="d-flex justify-content-center">Top 5 Skills Category out of a total of  {% skill_cat_type_count_tag %} skills</h3>
+        {% total_skill_cat_freq_types as most_commented_posts %}
+        <table class="table">
+            <thead>
+                <tr>
+                  <th>Skill Category</th>
+                  <th>Total Occurances of skill category</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            {%  for post in most_commented_posts %}
+            <tr>
+                <td>{{ post.user_skill_category__skill_category }}</td>
+                <td>{{ post.count_total}}</td>
+              </tr>   
+            {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+        <div id="container mt-5 mb-5">
+            <canvas id="bar-chart"></canvas>
+        </div>
+
+
+        <div class="container mt-5 mb-5">
+            <h3 class="d-flex justify-content-center">Top 5 Skills Sub out of a total of  {% skill_sub_type_count_tag %} skills Sub</h3>
+            {% total_skill_sub_freq_types as most_commented_posts %}
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th>Skill Sub</th>
+                      <th>Total Occurances of skill Sub</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                {%  for post in most_commented_posts %}
+                <tr>
+                    <td>{{ post.user_skill_sub_category__skill_sub_category }}</td>
+                    <td>{{ post.count_total}}</td>
+                  </tr>   
+                {% endfor %}
+        </tbody>
+        </table>
+    </div>
+
+
+    <div id="container mt-5 mb-5">
+        <canvas id="polarArea-chart"></canvas>
+    </div>
+
+
+    <div class="container mt-5 mb-5">
+      <h3 class="d-flex justify-content-center">All Skills  {% skill_type_count_tag %} </h3>
+      {% all_skill_types as most_commented_posts %}
+      <table class="table">
+          <thead>
+              <tr>
+                <th>Skill Sub</th>
+                <th>SKill Description</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          {%  for post in most_commented_posts %}
+          <tr>
+              <td>{{ post.skill_name }}</td>
+              <td>{{ post.skill_description }}</td>
+            </tr>   
+          {% endfor %}
+  </tbody>
+  </table>
+</div>
+
+
+
+<div class="container mt-5 mb-5">
+  <h3 class="d-flex justify-content-center">All Skill Category  {% skill_cat_type_count_tag %} </h3>
+  {% all_skill_cat_types as most_commented_posts %}
+  <table class="table">
+      <thead>
+          <tr>
+            <th>Skill Category</th>
+            <th>SKill Category Description</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      {%  for post in most_commented_posts %}
+      <tr>
+          <td>{{ post.skill_category }}</td>
+          <td>{{ post.skill_category_description }}</td>
+        </tr>   
+      {% endfor %}
+</tbody>
+</table>
+</div>
+
+
+<div class="container mt-5 mb-5">
+  <h3 class="d-flex justify-content-center">All Skill Subcategory  {% skill_cat_type_count_tag %} </h3>
+  {% all_skill_sub_cat_types as most_commented_posts %}
+  <table class="table">
+      <thead>
+          <tr>
+            <th>Skill Subcategory</th>
+            <th>SKill Subcategory Description</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      {%  for post in most_commented_posts %}
+      <tr>
+          <td>{{ post.skill_sub_category }}</td>
+          <td>{{ post.skill_sub_category_description }}</td>
+        </tr>   
+      {% endfor %}
+</tbody>
+</table>
+</div>
+
+
+</div>
+
+{% endblock content %}
+
+
+
+

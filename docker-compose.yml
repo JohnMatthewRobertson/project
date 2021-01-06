@@ -1,0 +1,28 @@
+services: 
+  web: 
+    build: .
+    #command: python /code/django_project/manage.py runserver 0.0.0.0:8000 django_project\config\wsgi.py
+    command: gunicorn config.wsgi -b 0.0.0.0:8000 -w 4 --chdir /code/django_project/
+    ports: 
+      - 8000:8000
+    volumes: 
+      - .:/code
+    depends_on:
+      - db
+    environment: 
+      - "DJANGO_SECRET_KEY=hosWiMeMecaP!5frep8o"
+      - "DJANGO_DEBUG=False"
+      - "DJANGO_HOSTS=*"
+      - "EMAIL_HOST_USER=cetmdjpy@gmail.com"
+      - "EMAIL_HOST_PASSWORD=mqlzkjtdcjhvhkkp"
+      - "EMAIL_HOST=smtp.gmail.com"
+      - "EMAIL_PORT=587"
+      - "EMAIL_USE_TLS=True"
+  db:
+    image: postgres:11
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment: 
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+volumes:
+  postgres_data:
