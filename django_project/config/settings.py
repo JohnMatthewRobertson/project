@@ -10,12 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-import os, dj_database_url
-#from dotenv import load_dotenv
-from environs import Env
-
-# default imports
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,32 +23,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # dotenv settings to find basedir django/config
 basedir = os.path.abspath(os.path.dirname(__file__))
-# dotenv settings to load .env file that contains environment variables into environment
-#load_dotenv(os.path.join(basedir, '.env'))
-# swap to environs
-env = Env()
-env.read_env()
 
+"""
+dotenv settings to load .env file
+that contains environment variables into environment
+"""
+load_dotenv(os.path.join(basedir, '.env'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = ')-@t0sjd%a45!cd+f)4rtun(8w-p5fkxv$m140q3p3ax&3_+i='
-# changed hardcored secret_key to environment variable 
-#SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', default='')
-SECRET_KEY = env('DJANGO_SECRET_KEY', default='')
+# changed hardcored secret_key to environment variable
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', default='')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
 # changed hardcoded debug true to environment variable
-#DEBUG = os.environ.get('DJANGO_DEBUG', default=False)
-DEBUG = env.bool('DJANGO_DEBUG', default=False)
+DEBUG = os.environ.get('DJANGO_DEBUG', default=False)
 
 
 # changed hardcoded allowed_hosts environment variable
 # https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts
-#ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = [env['DJANGO_HOSTS']]
-#ALLOWED_HOSTS = [os.environ.get['DJANGO_HOSTS']]
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = [os.environ['DJANGO_HOSTS']]
+
 
 # Application definition
 
@@ -69,7 +61,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth.account',
     'bootstrap_modal_forms',
-    'whitenoise.runserver_nostatic', # new
+    'whitenoise.runserver_nostatic',
 ]
 
 # django crispy forms setting
@@ -87,7 +79,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # new
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -114,40 +106,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-'''
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER':'postgres',
-        'HOST': 'db',
-        'PORT': '5432'
-    }
-}
-
-
-
-'''
-DATABASES = {
-    "default": dj_database_url.config("DATABASE_URL", default="postgres://postgres@db/postgres")
-}
-'''
-
-'''
-DATABASES = {
-    "default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
-}
-'''
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -221,21 +186,14 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-
-#EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-#EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-#EMAIL_HOST = os.environ.get("EMAIL_HOST")
-#EMAIL_PORT = os.environ.get("EMAIL_PORT")
-#EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
-
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_PORT = env("EMAIL_PORT")
-EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # new
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

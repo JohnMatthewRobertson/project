@@ -25,20 +25,25 @@
         browser = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
 '''
 
-import unittest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import WebDriverException
 from webdriver_manager.firefox import GeckoDriverManager
-from django.test import LiveServerTestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
+
 class FunctionalTest(StaticLiveServerTestCase):
+    """ base setup for gettting webbrowser and tear down"""
 
     def setUp(self):
         ''' get browser driver automatically '''
-        self.MAX_WAIT = 10
         self.browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+
+        self.correct_test_username = 'testuserone'
+        self.correct_test_userpassword = 'testpass123'
+        self.correct_test_useremail = 'testuserone@email.com'
+
+        self.wrong_test_username = 'testwronguser'
+        self.wrong_test_userpassword = 'testpwrongpassword'
+        self.wrong_test_useremail = 'testwrongemail@email.com'
 
     def tearDown(self):
         self.browser.close()
