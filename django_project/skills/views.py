@@ -8,7 +8,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView, BSModalDeleteView
-from skills.models import UserSkill
+from skills.models import UserSkill, SkillMain, SkillCategory, SkillSubCategory
 from skills.forms import (SkillCategoryModelForm,
                           SkillSubCategoryModelForm,
                           SkillMainModelForm,
@@ -138,6 +138,55 @@ class UserSkillListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         """ better comments """
         return UserSkill.publishedUserSkill.filter(author=self.request.user)
+
+class SkillDetailView(LoginRequiredMixin, ListView):
+    """ better comments """
+    model = SkillMain
+    context_object_name = 'skill_detail_list'
+    template_name = 'skills/skill_detail.html'
+    login_url = 'account_login'
+
+
+class SkillCategoryDetailView(LoginRequiredMixin, ListView):
+    """ better comments """
+    model = SkillCategory
+    context_object_name = 'skill_category_detail_list'
+    template_name = 'skills/skill_category_detail.html'
+    login_url = 'account_login'
+
+class SkillSubCategoryDetailView(LoginRequiredMixin, ListView):
+    """ better comments """
+    model = SkillSubCategory
+    context_object_name = 'skill_sub_category_detail_list'
+    template_name = 'skills/skill_sub_category_detail.html'
+    login_url = 'account_login'
+
+
+class SkillDetailUpdateView(BSModalUpdateView):
+    """ better comments """
+    model = SkillMain
+    template_name = 'skills/skill_create_skill.html'
+    form_class = SkillMainModelForm
+    success_message = 'Success: skill update'
+    success_url = reverse_lazy('skills:skill_detail')
+
+
+class  SkillCategoryDetailUpdateView(BSModalUpdateView):
+    """ better comments """
+    model = SkillCategory
+    template_name = 'skills/skill_create_skill_category.html'
+    form_class = SkillCategoryModelForm
+    success_message = 'Success: category update'
+    success_url = reverse_lazy('skills:skill_category_detail')
+
+
+class  SkillSubCategoryDetailUpdateView(BSModalUpdateView):
+    """ better comments """
+    model = SkillSubCategory
+    template_name = 'skills/skill_create_skill_sub_category.html'
+    form_class = SkillSubCategoryModelForm
+    success_message = 'Success: sub category update'
+    success_url = reverse_lazy('skills:skill_sub_category_detail')
 
 
 class UserSkillUpdateView(BSModalUpdateView):

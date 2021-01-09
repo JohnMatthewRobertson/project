@@ -29,7 +29,7 @@ class SkillCategory(models.Model):
     )
 
     skill_category = models.CharField(max_length=200, unique=True)
-    skill_category_description = models.CharField(max_length=200)
+    skill_category_description = models.TextField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
@@ -60,7 +60,7 @@ class SkillSubCategory(models.Model):
     )
 
     skill_sub_category = models.CharField(max_length=200, unique=True)
-    skill_sub_category_description = models.CharField(max_length=200)
+    skill_sub_category_description = models.TextField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
@@ -90,7 +90,7 @@ class SkillMain(models.Model):
     )
 
     skill_name = models.CharField(max_length=200, unique=True)
-    skill_description = models.CharField(max_length=300)
+    skill_description = models.TextField(max_length=300)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)

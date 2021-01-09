@@ -1,15 +1,17 @@
 """ better comments """
 
-from skills.models import UserSkill
 from django.views import View
 from django.db.models import Count
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from skills.models import UserSkill
 
 # Create your views here.
 
 
-class HubHome(View):
+class HubHome(LoginRequiredMixin, View):
     """ better comments"""
+    login_url = 'account_login'
 
     def get(self, request):
         """ better comments """
