@@ -45,6 +45,6 @@ class UserSignupTest(FunctionalTest):
 
         submit_buttom.click()
 
-        log_in_message = self.browser.find_element_by_css_selector('h2')
+        log_in_message = self.browser.find_element_by_css_selector('h1')
 
-        self.assertEqual(log_in_message.text, 'Log In')
+        self.assertEqual(log_in_message.text, 'Home')

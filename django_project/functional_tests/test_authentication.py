@@ -45,9 +45,9 @@ class AuthenticationTest(FunctionalTest):
 
         submit_buttom.click()
 
-        loggedin_message = self.browser.find_element_by_css_selector('h2')
+        loggedin_message = self.browser.find_element_by_css_selector('h1')
 
-        self.assertEqual(loggedin_message.text, 'Hi testuserone@email.com')
+        self.assertEqual(loggedin_message.text, 'Home')
 
         logout_link = self.browser.find_element_by_link_text('Log Out')
         self.assertEqual(logout_link.text, "Log Out")
@@ -58,9 +58,9 @@ class AuthenticationTest(FunctionalTest):
 
         submit_buttom.click()
 
-        loggedout_message = self.browser.find_element_by_css_selector('h2')
+        loggedout_message = self.browser.find_element_by_css_selector('h1')
 
-        self.assertEqual(loggedout_message.text, 'You are not logged in')
+        self.assertEqual(loggedout_message.text, 'Log In')
 
     def test_unsuccessfull_login(self):
         """ wrong user login """
