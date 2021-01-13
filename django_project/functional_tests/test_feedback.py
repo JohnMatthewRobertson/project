@@ -13,7 +13,8 @@ class FeedbackTest(FunctionalTest):
         user = normal_user.objects.create_user(username=self.correct_test_username,
                                                email=self.correct_test_useremail,
                                                password=self.correct_test_userpassword)
-
+                                            
+        self.assertEqual(user.username, self.correct_test_username)
 
         self.browser.get(self.live_server_url)
         
@@ -40,8 +41,6 @@ class FeedbackTest(FunctionalTest):
 
         submit_buttom.click()
 
-        time.sleep(10)
-
         loggedin_message = self.browser.find_element_by_css_selector('h1')
 
         self.assertEqual(loggedin_message.text, 'Home')
@@ -61,13 +60,13 @@ class FeedbackTest(FunctionalTest):
 
         submit_button.click()
 
-        display_message = self.browser.find_elements_by_class_name("card-text")
+        display_message = self.browser.find_element_by_class_name("card-text")
 
-        print(display_message)
+        user_name = self.browser.find_element_by_css_selector("h4")
 
-        time.sleep(10)
+        self.assertEqual(user_name.text, 'Name: testuserone')
 
-        self.assertEqual(display_message.text, "test message")
+        self.assertEqual(display_message.text, "Message: test message")
 
         logout_link = self.browser.find_element_by_link_text('Log Out')
         self.assertEqual(logout_link.text, "Log Out")

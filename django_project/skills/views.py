@@ -29,15 +29,6 @@ class SkillListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
 
-'''
-class SkillDetailView(LoginRequiredMixin, DetailView):
-    model = Skill
-    context_object_name = 'skill'
-    template_name = 'skills/skill_detail.html'
-    login_url = 'account_login'
-'''
-
-
 class SearchResultsListView(ListView):
     """ better comments """
     model = UserSkill

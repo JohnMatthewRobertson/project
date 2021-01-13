@@ -31,11 +31,12 @@ feedback\tests\test_form.py                       16      0   100%
 feedback\tests\test_model.py                      10      0   100%
 feedback\tests\test_view.py                       15      0   100%
 feedback\urls.py                                   4      0   100%
-feedback\views.py                                 22      5    77%
+feedback\views.py                                 22      0   100%
 functional_tests\__init__.py                       0      0   100%
 functional_tests\base.py                          14      0   100%
-functional_tests\test_authentication.py           49      8    84%
-functional_tests\test_user_signup.py              24      1    96%
+functional_tests\test_authentication.py           49      0   100%
+functional_tests\test_feedback.py                 42      0   100%
+functional_tests\test_user_signup.py              24      0   100%
 hub\__init__.py                                    0      0   100%
 hub\admin.py                                       1      0   100%
 hub\apps.py                                        3      0   100%
@@ -58,8 +59,8 @@ skills\models.py                                  66      4    94%
 skills\templatetags\__init__.py                    0      0   100%
 skills\templatetags\skill_tags.py                 34      1    97%
 skills\tests\__init__.py                           0      0   100%
-skills\tests\test_model.py                         1      0   100%
+skills\tests\test_model.py                        30      0   100%
 skills\urls.py                                     4      0   100%
 skills\views.py                                  156     51    67%
 ------------------------------------------------------------------
-TOTAL                                            740     94    87%
+TOTAL                                            811     80    90%
