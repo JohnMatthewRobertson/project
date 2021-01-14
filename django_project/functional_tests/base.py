@@ -31,7 +31,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 
 class FunctionalTest(StaticLiveServerTestCase):
-    """ base setup for gettting webbrowser and tear down"""
+    """ base setup for gettting webbrowser and tear down """
 
     def setUp(self):
         ''' get browser driver automatically '''
