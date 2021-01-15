@@ -1,4 +1,4 @@
-""" better comments """
+""" url call the class within view """
 
 from django.views import View
 from django.db.models import Count
@@ -10,13 +10,15 @@ from skills.models import UserSkill
 
 
 class HubHome(LoginRequiredMixin, View):
-    """ better comments"""
+    """ Home page view for displaying analytics """
     login_url = 'account_login'
 
     def get(self, request):
-        """ better comments """
+        """ retrive data for charts """
+
         labels = []
         data = []
+
         pie_chart = UserSkill.publishedUserSkill.all().values('user_skill', 'user_skill__skill_name').annotate(
             count_total=Count('user_skill')).order_by('-count_total')[:5]
 
@@ -26,6 +28,7 @@ class HubHome(LoginRequiredMixin, View):
 
         cat_labels = []
         cat_data = []
+
         cat_chart = UserSkill.publishedUserSkill.all().values('user_skill_category', 'user_skill_category__skill_category').annotate(
             count_total=Count('user_skill_category')).order_by('-count_total')[:5]
 
@@ -35,6 +38,7 @@ class HubHome(LoginRequiredMixin, View):
 
         sub_labels = []
         sub_data = []
+        
         sub_chart = UserSkill.publishedUserSkill.all().values('user_skill_sub_category', 'user_skill_sub_category__skill_sub_category').annotate(
             count_total=Count('user_skill_sub_category')).order_by('-count_total')[:5]
 

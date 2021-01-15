@@ -1,4 +1,4 @@
-""" better comments """
+""" views called by urls """
 
 from django.views import View
 from django.urls import reverse_lazy
@@ -21,7 +21,7 @@ from skills.forms import (SkillCategoryModelForm,
 
 
 class SkillListView(LoginRequiredMixin, ListView):
-    """ better comments """
+    """ defines the model and template used """
     model = UserSkill
     context_object_name = 'user_skill_list'
     template_name = 'skills/skill_list.html'
@@ -30,14 +30,17 @@ class SkillListView(LoginRequiredMixin, ListView):
 
 
 class SearchResultsListView(ListView):
-    """ better comments """
+    """ defines the model and template used """
     model = UserSkill
     context_object_name = 'user_skill_list'
     template_name = 'skills/search_results.html'
     paginate_by = 10
 
     def get_queryset(self):
-        """ better comments """
+        """ 
+            takes the search parameter and query data
+            and querys skill, Category, Sub Category
+        """
 
         result_list = []
 
@@ -76,7 +79,7 @@ class SearchResultsListView(ListView):
 
 
 class SkillCreateView(BSModalCreateView):
-    """ better comments """
+    """ defines the model, form and template used """
     template_name = 'skills/skill_create_skill.html'
     form_class = SkillMainModelForm
     success_message = 'Success: category created'
@@ -84,7 +87,7 @@ class SkillCreateView(BSModalCreateView):
 
 
 class SkillCategoryCreateView(BSModalCreateView):
-    """ better comments """
+    """ defines the model , form and template used """
     template_name = 'skills/skill_create_skill_category.html'
     form_class = SkillCategoryModelForm
     success_message = 'Success: category created'
@@ -92,7 +95,7 @@ class SkillCategoryCreateView(BSModalCreateView):
 
 
 class SkillSubCategoryCreateView(BSModalCreateView):
-    """ better comments """
+    """ defines the model , form and template used """
     template_name = 'skills/skill_create_skill_sub_category.html'
     form_class = SkillSubCategoryModelForm
     success_message = 'Success: sub category created'
@@ -100,26 +103,26 @@ class SkillSubCategoryCreateView(BSModalCreateView):
 
 
 class UserSkillCreate(LoginRequiredMixin, CreateView):
-    """ better comments """
+    """ defines the model , form and template used """
     form_class = UserSkillCreateModelForm
     template_name = 'skills/skill_create_user_skill.html'
     login_url = 'account_login'
     success_url = reverse_lazy('skills:user_skill_list')
 
     def get_form_kwargs(self):
-        """ better comments """
+        """ pre-populate form with logged in user """
         kwargs = super(UserSkillCreate, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
 
     def form_valid(self, form):
-        """ better comments """
+        """ check form is valid assignes user  """
         form.instance.author = self.request.user
         return super(UserSkillCreate, self).form_valid(form)
 
 
 class UserSkillListView(LoginRequiredMixin, ListView):
-    """ better comments """
+    """ defines the model and template used """
     model = UserSkill
     context_object_name = 'user_skill_list'
     template_name = 'skills/user_skill_list.html'
@@ -127,11 +130,11 @@ class UserSkillListView(LoginRequiredMixin, ListView):
     paginate_by = 3
 
     def get_queryset(self):
-        """ better comments """
+        """ returns list of skill for user """
         return UserSkill.publishedUserSkill.filter(author=self.request.user)
 
 class SkillDetailView(LoginRequiredMixin, ListView):
-    """ better comments """
+    """ defines the model and template used """
     model = SkillMain
     context_object_name = 'skill_detail_list'
     template_name = 'skills/skill_detail.html'
@@ -139,14 +142,14 @@ class SkillDetailView(LoginRequiredMixin, ListView):
 
 
 class SkillCategoryDetailView(LoginRequiredMixin, ListView):
-    """ better comments """
+    """ defines the model and template used """
     model = SkillCategory
     context_object_name = 'skill_category_detail_list'
     template_name = 'skills/skill_category_detail.html'
     login_url = 'account_login'
 
 class SkillSubCategoryDetailView(LoginRequiredMixin, ListView):
-    """ better comments """
+    """ defines the model and template used """
     model = SkillSubCategory
     context_object_name = 'skill_sub_category_detail_list'
     template_name = 'skills/skill_sub_category_detail.html'
@@ -154,7 +157,7 @@ class SkillSubCategoryDetailView(LoginRequiredMixin, ListView):
 
 
 class SkillDetailUpdateView(BSModalUpdateView):
-    """ better comments """
+    """ defines the model , form and template used """
     model = SkillMain
     template_name = 'skills/skill_create_skill.html'
     form_class = SkillMainModelForm
@@ -163,7 +166,7 @@ class SkillDetailUpdateView(BSModalUpdateView):
 
 
 class  SkillCategoryDetailUpdateView(BSModalUpdateView):
-    """ better comments """
+    """ defines the model , form and template used """
     model = SkillCategory
     template_name = 'skills/skill_create_skill_category.html'
     form_class = SkillCategoryModelForm
@@ -172,7 +175,7 @@ class  SkillCategoryDetailUpdateView(BSModalUpdateView):
 
 
 class  SkillSubCategoryDetailUpdateView(BSModalUpdateView):
-    """ better comments """
+    """ defines the model , form and template used """
     model = SkillSubCategory
     template_name = 'skills/skill_create_skill_sub_category.html'
     form_class = SkillSubCategoryModelForm
@@ -181,7 +184,7 @@ class  SkillSubCategoryDetailUpdateView(BSModalUpdateView):
 
 
 class UserSkillUpdateView(BSModalUpdateView):
-    """ better comments """
+    """ defines the model , form and template used """
     model = UserSkill
     template_name = 'skills/skill_update_skill.html'
     form_class = UserSkillModelFormModal
@@ -190,7 +193,7 @@ class UserSkillUpdateView(BSModalUpdateView):
 
 
 class UserSkillDeleteView(BSModalDeleteView):
-    """ better comments """
+    """ defines the model and template used """
     model = UserSkill
     context_object_name = 'user'
     template_name = 'skills/skill_delete_skill.html'
@@ -199,25 +202,25 @@ class UserSkillDeleteView(BSModalDeleteView):
 
 
 class TeamSkillView(LoginRequiredMixin, View):
-    """ better comments """
+    """ defines the model and template used """
     model = UserSkill
     login_url = 'account_login'
     context_object_name = 'user_skill_list'
     template_name = 'skills/team_skill.html'
 
     def get(self, request, *args, **kwargs):
-        """ better comments """
+        """ populate the form with user names """
         form = UserSkillAuthorModelForm()
         return render(request, self.template_name, {'form': form})
 
 
 class TeamSearchResultsListView(View):
-    """ better comments """
+    """ process the search parameters and returns team skill mix """
 
     context_object_name = 'user_skill_list'
 
     def get(self, request):
-        """ better comments """
+        """ query team user names for skills """
 
         data = self.request.GET.getlist('team')
 

@@ -18,7 +18,7 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    # Django admin
+    # Django admin changed from default 
     path('devadminportal/', admin.site.urls),
 
     # Account management

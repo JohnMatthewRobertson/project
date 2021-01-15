@@ -1,4 +1,4 @@
-""" better comments """
+""" forms for skills """
 
 from django import forms
 from skills.models import SkillCategory, SkillSubCategory, SkillMain, UserSkill
@@ -6,44 +6,44 @@ from bootstrap_modal_forms.forms import BSModalModelForm
 
 
 class SkillMainModelForm(BSModalModelForm):
-    """ better comments """
+    """ skill form used in modal """
 
     class Meta:
-        """ better comments """
+        """ model, fields from model to use """
         model = SkillMain
         fields = ['skill_name', 'skill_description']
 
 
 class SkillCategoryModelForm(BSModalModelForm):
-    """ better comments """
+    """ skill category form used in modal """
 
     class Meta:
-        """ better comments """
+        """ model, fields from model to use """
         model = SkillCategory
         fields = ['skill_category', 'skill_category_description']
 
 
 class SkillSubCategoryModelForm(BSModalModelForm):
-    """ better comments """
+    """ skill sub category form used in modal """
 
     class Meta:
-        """ better comments """
+        """ model, fields from model to use """
         model = SkillSubCategory
         fields = ['skill_sub_category', 'skill_sub_category_description']
 
 
 class UserSkillModelForm(forms.models.ModelForm):
-    """ better comments """
+    """ form used for user skill """
 
     class Meta:
-        """ better comments """
+        """ model, fields from model to use """
         model = UserSkill
         fields = ['user_skill', 'user_skill_category',
                   'user_skill_sub_category', ]
 
 
 class UserSkillAuthorModelForm(forms.Form):
-    """ better comments """
+    """ form used for team skill mix selection """
     names = UserSkill.objects.values_list(
         'author_id', 'author__username').distinct().order_by()
     
@@ -56,10 +56,10 @@ class UserSkillAuthorModelForm(forms.Form):
 
 
 class UserSkillModelFormModal(BSModalModelForm):
-    """ better comments """
+    """ form used user skill modal """
 
     class Meta:
-        """ better comments """
+        """ model, fields from model to use """
         model = UserSkill
         fields = ['user_skill',
                   'user_skill_category',
@@ -69,10 +69,10 @@ class UserSkillModelFormModal(BSModalModelForm):
 
 
 class UserSkillCreateModelForm(forms.models.ModelForm):
-    """ better comments """
+    """ form used for adding skill to user """
 
     class Meta:
-        """ better comments """
+        """ model, fields from model to use """
         model = UserSkill
         fields = ['user_skill',
                   'user_skill_category',
@@ -80,9 +80,7 @@ class UserSkillCreateModelForm(forms.models.ModelForm):
                   'teach', ]
 
     def __init__(self, *args, **kwargs):
-        """ better comments """
-        for item in kwargs:
-            print(item)
+        """ exclude skills already assigned to user """
         user = kwargs.pop('user')
         super(UserSkillCreateModelForm, self).__init__(*args, **kwargs)
         if self.instance:

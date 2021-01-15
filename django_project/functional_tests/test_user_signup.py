@@ -4,10 +4,10 @@ from .base import FunctionalTest
 
 
 class UserSignupTest(FunctionalTest):
-    """ better comment"""
+    """ test user registration """
 
     def test_user_can_sign_up(self):
-        """ better comment """
+        """ to user can successfully sign up """
 
         self.browser.get(self.live_server_url)
         self.browser.set_window_size(1024, 768)
