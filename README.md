@@ -246,3 +246,22 @@ docker exec -tiu postgres project_db_1 psql
 \l for databases
 
 \dt tables
+
+
+#### horoku
+
+heroku create
+
+set environment variables 
+
+heroku stack:set container -a intense-plains-14836
+
+heroku addons:create heroku-postgresql:hobby-dev -a intense-plains-14836
+
+heroku git:remote -a intense-plains-14836
+
+git push heroku main
+
+heroku run python /code/django_project/manage.py migrate
+
+heroku run python /code/django_project/manage.py createsuperuser

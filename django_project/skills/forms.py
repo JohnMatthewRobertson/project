@@ -46,7 +46,7 @@ class UserSkillAuthorModelForm(forms.Form):
     """ better comments """
     names = UserSkill.objects.values_list(
         'author_id', 'author__username').distinct().order_by()
-
+    
     team = forms.MultipleChoiceField(
         choices=names,
         widget=forms.SelectMultiple(),
