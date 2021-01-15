@@ -1,13 +1,12 @@
+""" forms for accounts """
+
 from django import forms
-from django.core.exceptions import ValidationError
 from feedback.models import Feedback
 
-class FeedbackForm(forms.models.ModelForm):
 
+class FeedbackForm(forms.models.ModelForm):
+    """ feedback form """
     class Meta:
+        """ model, fields """
         model = Feedback
         fields = ['message', ]
-
-
-
-        

@@ -1,27 +1,23 @@
-""" functional test using selenium """
+""" functional test"""
 
 from django.contrib.auth import get_user_model
 from .base import FunctionalTest
+import time
 
+class SkillListTest(FunctionalTest):
+    """ test the skill detail view and skill detail edit """
 
-class AuthenticationTest(FunctionalTest):
-    """ test login and logout """
-
-    def test_login_and_logout_successfully(self):
-        """ user login and logout """
-
+    def test_user_can_log_and_access_skill_detail(self):
+        """ create test user login and access skill detail link """
         normal_user = get_user_model()
         user = normal_user.objects.create_user(username=self.correct_test_username,
                                                email=self.correct_test_useremail,
                                                password=self.correct_test_userpassword)
-
+                                            
         self.assertEqual(user.username, self.correct_test_username)
-        self.assertEqual(user.email, self.correct_test_useremail)
-        self.assertTrue(user.is_active)
-        self.assertFalse(user.is_staff)
-        self.assertFalse(user.is_superuser)
 
         self.browser.get(self.live_server_url)
+        
         self.browser.set_window_size(1024, 768)
 
         login_link = self.browser.find_element_by_link_text('Log In')
@@ -49,23 +45,26 @@ class AuthenticationTest(FunctionalTest):
 
         self.assertEqual(loggedin_message.text, 'Home')
 
-        logout_link = self.browser.find_element_by_link_text('Log Out')
-        self.assertEqual(logout_link.text, "Log Out")
+        skill_detail_link = self.browser.find_element_by_link_text('Skill Detail')
+        self.assertEqual(skill_detail_link.text, "Skill Detail")
 
-        logout_link.click()
+        skill_detail_link.click()
 
-        submit_buttom = self.browser.find_element_by_css_selector('button')
+        skill_list_page = self.browser.find_element_by_css_selector('h1')
 
-        submit_buttom.click()
+        self.assertEqual(skill_list_page.text, 'Skill Detail')
 
-        loggedout_message = self.browser.find_element_by_css_selector('h1')
-
-        self.assertEqual(loggedout_message.text, 'Log In')
-
-    def test_unsuccessfull_login(self):
-        """ wrong user login """
+    def test_user_can_log_and_access_skill_detail_and_access_edit(self):
+        """ create test user login and access skill Detail link access edit """
+        normal_user = get_user_model()
+        user = normal_user.objects.create_user(username=self.correct_test_username,
+                                               email=self.correct_test_useremail,
+                                               password=self.correct_test_userpassword)
+                                            
+        self.assertEqual(user.username, self.correct_test_username)
 
         self.browser.get(self.live_server_url)
+        
         self.browser.set_window_size(1024, 768)
 
         login_link = self.browser.find_element_by_link_text('Log In')
@@ -77,19 +76,33 @@ class AuthenticationTest(FunctionalTest):
 
         username.click()
 
-        username.send_keys(self.wrong_test_useremail)
+        username.send_keys(self.correct_test_useremail)
 
         password = self.browser.find_element_by_id('id_password')
 
         password.click()
 
-        password.send_keys(self.wrong_test_userpassword)
+        password.send_keys(self.correct_test_userpassword)
 
         submit_buttom = self.browser.find_element_by_css_selector('button')
 
         submit_buttom.click()
 
-        html_list = self.browser.find_element_by_css_selector('div.alert.alert-block.alert-danger')
+        loggedin_message = self.browser.find_element_by_css_selector('h1')
 
-        self.assertEqual(html_list.text,
-                         'The e-mail address and/or password you specified are not correct.')
+        self.assertEqual(loggedin_message.text, 'Home')
+
+        skill_detail_link = self.browser.find_element_by_link_text('Skill Detail')
+        self.assertEqual(skill_detail_link.text, "Skill Detail")
+
+        skill_detail_link.click()
+
+        skill_list_page = self.browser.find_element_by_css_selector('h1')
+
+        self.assertEqual(skill_list_page.text, 'Skill Detail')
+
+
+
+
+
+

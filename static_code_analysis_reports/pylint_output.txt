@@ -1,2 +1,76 @@
-************* Module *
-*:1:0: F0001: No module named * (fatal)
+************* Module django_project.manage
+django_project\manage.py:11:8: C0415: Import outside toplevel (django.core.management.execute_from_command_line) (import-outside-toplevel)
+************* Module django_project.accounts.models
+django_project\accounts\models.py:15:4: W0107: Unnecessary pass statement (unnecessary-pass)
+************* Module django_project.feedback.models
+django_project\feedback\models.py:18:15: R1725: Consider using Python 3 style super() without arguments (super-with-arguments)
+django_project\feedback\models.py:13:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module django_project.feedback.views
+django_project\feedback\views.py:16:0: R0901: Too many ancestors (11/7) (too-many-ancestors)
+django_project\feedback\views.py:29:4: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+django_project\feedback\views.py:29:0: W0613: Unused argument 'args' (unused-argument)
+django_project\feedback\views.py:29:0: W0613: Unused argument 'kwargs' (unused-argument)
+************* Module django_project.feedback.tests.tests
+django_project\feedback\tests\tests.py:2:0: W0611: Unused TestCase imported from django.test (unused-import)
+************* Module django_project.hub.admin
+django_project\hub\admin.py:7:0: W0611: Unused admin imported from django.contrib (unused-import)
+************* Module django_project.hub.models
+django_project\hub\models.py:2:0: W0611: Unused models imported from django.db (unused-import)
+************* Module django_project.hub.views
+django_project\hub\views.py:18:0: C0301: Line too long (111/100) (line-too-long)
+django_project\hub\views.py:27:0: C0301: Line too long (133/100) (line-too-long)
+django_project\hub\views.py:36:0: C0301: Line too long (145/100) (line-too-long)
+************* Module django_project.skills.forms
+django_project\skills\forms.py:87:8: R1725: Consider using Python 3 style super() without arguments (super-with-arguments)
+************* Module django_project.skills.models
+django_project\skills\models.py:16:15: R1725: Consider using Python 3 style super() without arguments (super-with-arguments)
+django_project\skills\models.py:11:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+django_project\skills\models.py:47:15: R1725: Consider using Python 3 style super() without arguments (super-with-arguments)
+django_project\skills\models.py:42:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+django_project\skills\models.py:78:15: R1725: Consider using Python 3 style super() without arguments (super-with-arguments)
+django_project\skills\models.py:73:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+django_project\skills\models.py:108:15: R1725: Consider using Python 3 style super() without arguments (super-with-arguments)
+django_project\skills\models.py:103:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+django_project\skills\models.py:137:4: R0201: Method could be a function (no-self-use)
+************* Module django_project.skills.views
+django_project\skills\views.py:82:0: C0301: Line too long (104/100) (line-too-long)
+django_project\skills\views.py:198:0: C0301: Line too long (112/100) (line-too-long)
+django_project\skills\views.py:207:0: C0301: Line too long (124/100) (line-too-long)
+django_project\skills\views.py:23:0: R0901: Too many ancestors (10/7) (too-many-ancestors)
+django_project\skills\views.py:32:0: W0105: String statement has no effect (pointless-string-statement)
+django_project\skills\views.py:41:0: R0901: Too many ancestors (8/7) (too-many-ancestors)
+django_project\skills\views.py:77:8: R1705: Unnecessary "elif" after "return" (no-else-return)
+django_project\skills\views.py:120:17: R1725: Consider using Python 3 style super() without arguments (super-with-arguments)
+django_project\skills\views.py:127:15: R1725: Consider using Python 3 style super() without arguments (super-with-arguments)
+django_project\skills\views.py:130:0: R0901: Too many ancestors (10/7) (too-many-ancestors)
+django_project\skills\views.py:168:0: W0613: Unused argument 'args' (unused-argument)
+django_project\skills\views.py:168:0: W0613: Unused argument 'kwargs' (unused-argument)
+************* Module django_project.skills.templatetags.skill_tags
+django_project\skills\templatetags\skill_tags.py:50:0: C0301: Line too long (167/100) (line-too-long)
+django_project\skills\templatetags\skill_tags.py:56:0: C0301: Line too long (198/100) (line-too-long)
+django_project\skills\templatetags\skill_tags.py:62:0: C0301: Line too long (214/100) (line-too-long)
+************* Module django_project.skills.tests.test_model
+django_project\skills\tests\test_model.py:2:0: W0611: Unused TestCase imported from django.test (unused-import)
+************* Module django_project.skills.tests.__init__
+django_project\skills\tests\__init__.py:1:0: R0801: Similar lines in 2 files
+==django_project.hub.views:29
+==django_project.skills.views:200
+        for item in cat_chart:
+            cat_labels.append(item['user_skill_category__skill_category'])
+            cat_data.append(item['count_total'])
+
+        sub_labels = []
+        sub_data = [] (duplicate-code)
+django_project\skills\tests\__init__.py:1:0: R0801: Similar lines in 2 files
+==django_project.hub.views:20
+==django_project.skills.views:191
+        for item in pie_chart:
+            labels.append(item['user_skill__skill_name'])
+            data.append(item['count_total'])
+
+        cat_labels = []
+        cat_data = [] (duplicate-code)
+
+------------------------------------------------------------------
+Your code has been rated at 9.30/10 (previous run: 9.19/10, +0.11)
+

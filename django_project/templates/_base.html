@@ -5,7 +5,9 @@
 
 <head>
   <meta charset="utf-8">
+  <!-- bootstrap css -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- font awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style> 
     body {
@@ -32,14 +34,22 @@
       <a class="nav-link" href="{% url 'skills:skill_list' %}"> Skill List</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" href="{% url 'skills:skill_detail' %}"> Skill Detail</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'skills:skill_category_detail' %}"> Skill Category Detail</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'skills:skill_sub_category_detail' %}"> Skill Sub Category Detail</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="{% url 'skills:team_skill' %}"> Team Skill</a>
     </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> User Skills Options</a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="{% url 'skills:user_skill_list' %}">User Skill list</a>
-        <a class="dropdown-item" href="{% url 'skills:user_skill_add' %}">User Add Skill</a>
-      </div>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'skills:user_skill_list' %}"> User Skill List</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'skills:user_skill_add' %}"> User Skill Add</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'feedback:feedback_list' %}"> Feedback</a>
@@ -63,16 +73,12 @@
 {% endblock navbar %}
  
 
+{% block content %}
+{% endblock content %}
 
-  
-  <div >
-    {% block content %}
 
-    {% endblock content %}
-  </div>
-
-  
- <!-- jQuery library -->
+{% block scripts %}  
+<!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
@@ -81,124 +87,13 @@
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
+<!-- bootstrap js-->
 <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 
-
-
-
+<!-- chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-<script>
-
-  var config1 = {
-    type: 'doughnut',
-    data: { datasets: [{data:{{data|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills'}], labels: {{ labels|safe }}},
-    options: {
-      responsive: true,
-      title: {
-            display: true,
-            text: 'Top 5 Skills',
-            fontSize: 30,
-        }
-    }
-  };
-
-  var config2 = {
-    type: 'horizontalBar',
-    data: {
-      datasets: [{data: {{catdata|safe}},
-        backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skill Category'}], labels: {{ catlabels|safe }}},
-    options: {
-      legend: {display: false,},
-      scales: {xAxes:[{ticks : {beginAtZero : true}}]},
-      responsive: true,
-      title: {
-            display: true,
-            text: 'Top 5 Skills Category',
-            fontSize: 30,
-        }
-    }
-  };
-
-
-  var config3 = {
-    type: 'polarArea',
-    data: {
-      datasets: [{data: {{subdata|safe}},
-        backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skill Sub Category'}], labels: {{ sublabels|safe }}},
-    options: {
-      responsive: true,
-      title: {
-            display: true,
-            text: 'Top 5 Skills Sub Category',
-            fontSize: 30,
-        }
-    }
-  };
-
-  window.onload = function() {
-    var ctx1 = document.getElementById('pie-chart').getContext('2d');
-    window.myPie1 = new Chart(ctx1, config1);
-
-    var ctx2 = document.getElementById('bar-chart').getContext('2d');
-    window.myPie2 = new Chart(ctx2, config2);
-
-    var ctx3 = document.getElementById('polarArea-chart').getContext('2d');
-    window.myPie3 = new Chart(ctx3, config3);
-  }
-
-
-
-</script>
-
-
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-    
-        $("#create-book").modalForm({
-            formURL: "{% url 'skills:skill_category_add' %}"
-        });
-    
-    });
-    </script>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-  
-      $("#create-sub").modalForm({
-          formURL: "{% url 'skills:skill_sub_category_add' %}"
-      });
-  
-  });
-  </script>
-
-
-<script type="text/javascript">
-  $(document).ready(function() {
-  
-      $("#create-skill").modalForm({
-          formURL: "{% url 'skills:skill_add' %}"
-      });
-  
-  });
-  </script>
-
-<script type="text/javascript">
-  $(function () {
-
-    // Update, Read and Delete book buttons open modal with id="modal" (default)
-    // The formURL is retrieved from the data of the element
-    $(".bs-modal").each(function () {
-      $(this).modalForm({
-          formURL: $(this).data('form-url')
-      });
-    });
-
-
-  });
-</script>
-
+{% endblock %}
 
 </body>
 

@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-
+{% load static %}
 {% block title %}User Skills{% endblock title %}
 
 {% block content %}
@@ -52,7 +52,24 @@
 
 {% include "pagination.html" with page=page_obj %}
 
-
 {% endblock content %}
 
+{% block scripts %}
+  {{ block.super }}
+  
+  <script type="text/javascript">
+  $(function () {
+  
+    // Update, Read and Delete book buttons open modal with id="modal" (default)
+    // The formURL is retrieved from the data of the element
+    $(".bs-modal").each(function () {
+      $(this).modalForm({
+          formURL: $(this).data('form-url')
+      });
+    });
+  
+  
+  });
+  </script>
+{% endblock %}
 

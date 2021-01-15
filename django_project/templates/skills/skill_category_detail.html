@@ -1,14 +1,14 @@
 {% extends '_base.html' %}
 {% load skill_tags %}
 
-{% block title %} skill detail {% endblock title %}
+{% block title %} skill category detail {% endblock title %}
 
 {% block content %}
 <div class="container">
 
     <div class="container mt-5 mb-5">
         <div class="jumbotron">
-            <h1 class="d-flex justify-content-center">Skill Detail</h1>
+            <h1 class="d-flex justify-content-center">Skill Category Detail</h1>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <h3 class="d-flex justify-content-center">Skill Detail List of a total  {% skill_type_count_tag %} skills</h3>
+    <h3 class="d-flex justify-content-center">Skill Detail List of a total  {% skill_cat_type_count_tag %} skills</h3>
     <table class="table">
         <thead>
             <tr>
@@ -31,13 +31,13 @@
             </tr>
           </thead>
           <tbody></tbody>
-          {% for item in skill_detail_list %}
+          {% for item in skill_category_detail_list %}
         <tr>
-            <td>{{ item.skill_name }}</td>
-            <td>{{ item.skill_description }}</td>
+            <td>{{ item.skill_category }}</td>
+            <td>{{ item.skill_category_description }}</td>
             <td>{{ item.created }}</td>
             <td>{{ item.updated }}</td>
-            <td><button type="button" id="update-book" class="bs-modal btn btn-sm btn-primary" data-form-url="{% url 'skills:skill_detail_update' item.id %}"><span class="fa fa-pencil"></span></button></td>
+            <td><button type="button" id="update-book" class="bs-modal btn btn-sm btn-primary" data-form-url="{% url 'skills:skill_category_detail_update' item.id %}"><span class="fa fa-pencil"></span></button></td>
           </tr>   
         {% endfor %}
 </tbody>

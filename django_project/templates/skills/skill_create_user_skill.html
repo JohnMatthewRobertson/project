@@ -36,3 +36,39 @@
 
 </div>
 {% endblock content %}
+
+{% block scripts %}
+  {{ block.super }}
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+    
+        $("#create-book").modalForm({
+            formURL: "{% url 'skills:skill_category_add' %}"
+        });
+    
+    });
+    </script>
+  
+  <script type="text/javascript">
+  $(document).ready(function() {
+  
+      $("#create-sub").modalForm({
+          formURL: "{% url 'skills:skill_sub_category_add' %}"
+      });
+  
+  });
+  </script>
+  
+  
+  <script type="text/javascript">
+  $(document).ready(function() {
+  
+      $("#create-skill").modalForm({
+          formURL: "{% url 'skills:skill_add' %}"
+      });
+  
+  });
+  </script>
+  
+{% endblock %}

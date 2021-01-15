@@ -1,8 +1,14 @@
+"""
+    module created automatically
+    when the following django command is run
+    python manage.py startapp <app name>
+"""
+
 from django.urls import path
-from . import views
+from hub.views import HubHome
 
 app_name = 'hub'
 
 urlpatterns = [
-    path('', views.HubHome.as_view(), name='hub_home'),
+    path('', HubHome.as_view(), name='hub_home'),
 ]

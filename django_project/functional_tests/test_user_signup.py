@@ -1,19 +1,13 @@
-import unittest, time
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import WebDriverException
-from webdriver_manager.firefox import GeckoDriverManager
-from django.test import LiveServerTestCase
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+""" functional test"""
+
 from .base import FunctionalTest
 
+
 class UserSignupTest(FunctionalTest):
+    """ better comment"""
 
     def test_user_can_sign_up(self):
-
-        self.test_username = 'testusertwo'
-        self.test_userpassword = 'testpass123'
-        self.test_useremail = 'testusertwo@email.com'
+        """ better comment """
 
         self.browser.get(self.live_server_url)
         self.browser.set_window_size(1024, 768)
@@ -27,34 +21,30 @@ class UserSignupTest(FunctionalTest):
 
         email.click()
 
-        email.send_keys(self.test_useremail)
+        email.send_keys(self.correct_test_useremail)
 
         username = self.browser.find_element_by_id('id_username')
-        
+
         username.click()
 
-        username.send_keys(self.test_username)
+        username.send_keys(self.correct_test_username)
 
         password_one = self.browser.find_element_by_id('id_password1')
 
         password_one.click()
 
-        password_one.send_keys(self.test_userpassword)
+        password_one.send_keys(self.correct_test_userpassword)
 
         password_two = self.browser.find_element_by_id('id_password2')
 
         password_two.click()
 
-        password_two.send_keys(self.test_userpassword)
+        password_two.send_keys(self.correct_test_userpassword)
 
         submit_buttom = self.browser.find_element_by_css_selector('button')
 
         submit_buttom.click()
 
-        log_in_message = self.browser.find_element_by_css_selector('h2')
+        log_in_message = self.browser.find_element_by_css_selector('h1')
 
-        self.assertEqual(log_in_message.text, 'Log In')
-
-  
-
-  
+        self.assertEqual(log_in_message.text, 'Home')

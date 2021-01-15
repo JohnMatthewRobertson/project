@@ -132,67 +132,73 @@
 
 </div>
 
-<script>
-
-  var config4 = {
-    type: 'polarArea',
-    data: { datasets: [{data:{{data|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills'}], labels: {{ labels|safe }}},
-    options: {
-      responsive: true,
-      title: {
-            display: true,
-            text: 'Team Skills',
-            fontSize: 30,
-        }
-    }
-  };
-
-
-  var config5 = {
-    type: 'polarArea',
-    data: { datasets: [{data:{{catdata|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills Cat'}], labels: {{ catlabels|safe }}},
-    options: {
-      responsive: true,
-      title: {
-            display: true,
-            text: 'Team Skill Category',
-            fontSize: 30,
-        }
-    }
-  };
-
-  var config6 = {
-    type: 'polarArea',
-    data: { datasets: [{data:{{sub_data|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills Cat'}], labels: {{ sub_labels|safe }}},
-    options: {
-      responsive: true,
-      title: {
-            display: true,
-            text: 'Team Skill Sub Category',
-            fontSize: 30,
-        }
-    }
-  };
-
-
-
-
-  window.onload = function() {
-    var ctx4 = document.getElementById('polar-chart-skill').getContext('2d');
-    window.myPie4 = new Chart(ctx4, config4);
-
-    var ctx5 = document.getElementById('polar-chart-skill-category').getContext('2d');
-    window.myPie5 = new Chart(ctx5, config5);
-
-    var ctx6 = document.getElementById('polar-chart-skill-sub-category').getContext('2d');
-    window.myPie6 = new Chart(ctx6, config6);
-
-
-  }
-
-
-
-</script>
-
 {% endblock %}
 
+
+{% block scripts %}
+  {{ block.super }}
+
+  <script>
+
+    var config4 = {
+      type: 'polarArea',
+      data: { datasets: [{data:{{data|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills'}], labels: {{ labels|safe }}},
+      options: {
+        responsive: true,
+        title: {
+              display: true,
+              text: 'Team Skills',
+              fontSize: 30,
+          }
+      }
+    };
+  
+  
+    var config5 = {
+      type: 'polarArea',
+      data: { datasets: [{data:{{catdata|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills Cat'}], labels: {{ catlabels|safe }}},
+      options: {
+        responsive: true,
+        title: {
+              display: true,
+              text: 'Team Skill Category',
+              fontSize: 30,
+          }
+      }
+    };
+  
+    var config6 = {
+      type: 'polarArea',
+      data: { datasets: [{data:{{sub_data|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills Cat'}], labels: {{ sub_labels|safe }}},
+      options: {
+        responsive: true,
+        title: {
+              display: true,
+              text: 'Team Skill Sub Category',
+              fontSize: 30,
+          }
+      }
+    };
+  
+  
+  
+  
+    window.onload = function() {
+      var ctx4 = document.getElementById('polar-chart-skill').getContext('2d');
+      window.myPie4 = new Chart(ctx4, config4);
+  
+      var ctx5 = document.getElementById('polar-chart-skill-category').getContext('2d');
+      window.myPie5 = new Chart(ctx5, config5);
+  
+      var ctx6 = document.getElementById('polar-chart-skill-sub-category').getContext('2d');
+      window.myPie6 = new Chart(ctx6, config6);
+  
+  
+    }
+  
+  
+  
+  </script>
+
+
+{% endblock %}

@@ -1,32 +1,57 @@
+""" better documents """
 from django.test import TestCase
-from django.urls import reverse
-from skills.models import Skill
+from django.contrib.auth import get_user_model
+from skills.models import SkillMain, SkillCategory, SkillSubCategory, UserSkill
+
 
 # Create your tests here.
 
-class SkillTest(TestCase):
 
+class SkillModelTest(TestCase):
+    """ test creating a skill """
     def setUp(self):
-        self.skill = Skill.objects.create(
-            skill_name = 'Java',
-            skill_description = 'Java is a class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let application developers write once, run anywhere,'
+        """ create a test user """
+        self.user = get_user_model().objects.create_user(
+            username = 'testuser',
+            email = 'testuser@email.com',
+            password = 'testpass123',
         )
+
+    def test_create_skill_category(self):
+        """ create and save skill """
+        self.skill_cateogory = SkillCategory.objects.create(skill_category='test_category', skill_category_description='test_category_description')
+        self.skill_cateogory.save()
+        self.assertIn(self.skill_cateogory, SkillCategory.objects.all())
+
+    def test_create_skill_sub_category(self):
+        """ create and save sub skill """
+        self.skill_sub_cateogory = SkillSubCategory.objects.create(skill_sub_category='test_sub_category', skill_sub_category_description='test_sub_category_description')
+        self.skill_sub_cateogory.save()
+        self.assertIn(self.skill_sub_cateogory, SkillSubCategory.objects.all())
+
+    def test_create_skill(self):
+        """ create and save skill """
+        self.skill_main = SkillMain.objects.create(skill_name='test_skill', skill_description='test_skill_description')
+        self.skill_main.save()
+        self.assertIn(self.skill_main, SkillMain.objects.all())
+
+    def test_create_user_skill(self):
+        """ create and save user skill """
+        self.skill_main = SkillMain.objects.create(skill_name='test_skill', skill_description='test_skill_description')
+        self.skill_main.save()
+
+        self.skill_cateogory = SkillCategory.objects.create(skill_category='test_category', skill_category_description='test_category_description')
+        self.skill_cateogory.save()
+
+        self.skill_sub_cateogory = SkillSubCategory.objects.create(skill_sub_category='test_sub_category', skill_sub_category_description='test_sub_category_description')
+        self.skill_sub_cateogory.save()
         
+        self.user_skill = UserSkill.objects.create(author=self.user, user_skill=self.skill_main)
+        self.user_skill.user_skill_category.add(self.skill_cateogory)
+        self.user_skill.user_skill_sub_category.add(self.skill_sub_cateogory)
+        self.user_skill.save()
+        self.assertIn(self.user_skill, UserSkill.objects.all())
 
-    def test_skill_listing(self):
-        self.assertEqual(self.skill.skill_name, 'Java')
-        self.assertEqual(self.skill.skill_description, 'Java is a class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let application developers write once, run anywhere,')
-        
-    def test_skill_list_view(self):
-        response = self.client.get(reverse('skills:skill_list'))
-        self.assertEqual(response.status_code, 200)
 
-    def test_skill_uses_skill_template(self):
-        response = self.client.get(reverse('skills:skill_list'))
-        self.assertTemplateUsed(response, 'skills/skill_list.html')
 
-    def test_skill_detail_view(self):
-        response = self.client.get(self.skill.get_absolute_url())
-        self.assertEqual(response.status_code, 200)
 
-    

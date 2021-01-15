@@ -40,6 +40,12 @@ pip install pylint
 
 pylint <filename> --ignore=env_prjoect > static_code_analysis_reports/pylint_output.txt
 
+pip install pylint-django
+
+https://pypi.org/project/pylint-django/
+
+pylint django_project --ignore=env_prjoect --load-plugins pylint_django --django-settings-module=config.settings > static_code_analysis_reports/pylint_output.txt
+
 https://pypi.org/project/autopep8/
 
 pip install autopep8

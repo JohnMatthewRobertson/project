@@ -143,7 +143,7 @@
 
 
 <div class="container mt-5 mb-5">
-  <h3 class="d-flex justify-content-center">All Skill Subcategory  {% skill_cat_type_count_tag %} </h3>
+  <h3 class="d-flex justify-content-center">All Skill Subcategory  {% skill_sub_type_count_tag %} </h3>
   {% all_skill_sub_cat_types as most_commented_posts %}
   <table class="table">
       <thead>
@@ -167,6 +167,76 @@
 </div>
 
 {% endblock content %}
+
+
+{% block scripts %}
+  {{ block.super }}
+
+  <script>
+
+    var config1 = {
+      type: 'doughnut',
+      data: { datasets: [{data:{{data|safe}}, backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skills'}], labels: {{ labels|safe }}},
+      options: {
+        responsive: true,
+        title: {
+              display: true,
+              text: 'Top 5 Skills',
+              fontSize: 30,
+          }
+      }
+    };
+  
+    var config2 = {
+      type: 'horizontalBar',
+      data: {
+        datasets: [{data: {{catdata|safe}},
+          backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skill Category'}], labels: {{ catlabels|safe }}},
+      options: {
+        legend: {display: false,},
+        scales: {xAxes:[{ticks : {beginAtZero : true}}]},
+        responsive: true,
+        title: {
+              display: true,
+              text: 'Top 5 Skills Category',
+              fontSize: 30,
+          }
+      }
+    };
+  
+  
+    var config3 = {
+      type: 'polarArea',
+      data: {
+        datasets: [{data: {{subdata|safe}},
+          backgroundColor: ['#0074D9', '#ffff00', '#2ECC40', '#FF851B', '#7FDBFF'], label: 'Top Skill Sub Category'}], labels: {{ sublabels|safe }}},
+      options: {
+        responsive: true,
+        title: {
+              display: true,
+              text: 'Top 5 Skills Sub Category',
+              fontSize: 30,
+          }
+      }
+    };
+  
+    window.onload = function() {
+      var ctx1 = document.getElementById('pie-chart').getContext('2d');
+      window.myPie1 = new Chart(ctx1, config1);
+  
+      var ctx2 = document.getElementById('bar-chart').getContext('2d');
+      window.myPie2 = new Chart(ctx2, config2);
+  
+      var ctx3 = document.getElementById('polarArea-chart').getContext('2d');
+      window.myPie3 = new Chart(ctx3, config3);
+    }
+  
+  
+  
+  </script>
+
+  
+{% endblock %}
 
 
 
