@@ -1,4 +1,4 @@
-""" better comments """
+""" unit tests """
 
 from django.test import TestCase
 from django.urls import reverse, resolve
@@ -7,7 +7,7 @@ from hub.views import HubHome
 
 
 class HomePageTest(TestCase):
-    """ better comments """
+    """ test login in and reach home page """
 
     def setUp(self):
         """ create a test user """
@@ -19,7 +19,7 @@ class HomePageTest(TestCase):
 
 
     def test_home_page_status_code(self):
-        """ better comments """
+        """ login test home page status code """
         response = self.client.login(email='testuser@email.com', password='testpass123')
         self.assertTrue(response)
         url = reverse('hub:hub_home')
@@ -27,21 +27,21 @@ class HomePageTest(TestCase):
         self.assertEqual(self.response.status_code, 200)
 
     def test_home_page_url_name(self):
-        """ better comments """
+        """ login test home page status code """
         response = self.client.login(email='testuser@email.com', password='testpass123')
         self.assertTrue(response)
         response = self.client.get(reverse('hub:hub_home'))
         self.assertEqual(response.status_code, 200)
 
     def test_home_page_uses_home_template(self):
-        """ better comments """
+        """ test correct template used """
         response = self.client.login(email='testuser@email.com', password='testpass123')
         self.assertTrue(response)
         response = self.client.get(reverse('hub:hub_home'))
         self.assertTemplateUsed(response, 'hub/home.html')
 
     def test_home_page_url_resolves_home_page_view(self):
-        """ better comments """
+        """ test view resolves to home page """
         response = self.client.login(email='testuser@email.com', password='testpass123')
         self.assertTrue(response)
         view = resolve('/')

@@ -1,18 +1,21 @@
 """ functional test"""
 
 from django.contrib.auth import get_user_model
+from skills.models import SkillMain, SkillCategory, SkillSubCategory, UserSkill
 from .base import FunctionalTest
 import time
 
-class FeedbackTest(FunctionalTest):
-    """ test user login in and leave feedback"""
+class TeamSkillTest(FunctionalTest):
+    """ test user login in and team skill search"""
 
     def test_user_can_log_in_and_leave_feedback(self):
-        """ test user for login in and leaving feedback """
+        """ test user for login in and team skill search """
         normal_user = get_user_model()
         user = normal_user.objects.create_user(username=self.correct_test_username,
                                                email=self.correct_test_useremail,
                                                password=self.correct_test_userpassword)
+
+
                                             
         self.assertEqual(user.username, self.correct_test_username)
 
@@ -45,40 +48,14 @@ class FeedbackTest(FunctionalTest):
 
         self.assertEqual(loggedin_message.text, 'Home')
 
-        feedback_link = self.browser.find_element_by_link_text('Feedback')
-        self.assertEqual(feedback_link.text, "Feedback")
+        team_skill_link = self.browser.find_element_by_link_text('Team Skill')
+        self.assertEqual(team_skill_link.text, "Team Skill")
 
-        feedback_link.click()
+        team_skill_link.click()
 
-        message = self.browser.find_element_by_id("id_message")
-        
-        message.click()
+        team_skill_page = self.browser.find_element_by_css_selector('h1')
 
-        message.send_keys("test message")
+        self.assertEqual(team_skill_page.text, 'Team Skill')
 
-        submit_button = self.browser.find_element_by_css_selector(".btn")
-
-        submit_button.click()
-
-        display_message = self.browser.find_element_by_class_name("card-text")
-
-        user_name = self.browser.find_element_by_css_selector("h4")
-
-        self.assertEqual(user_name.text, 'Name: testuserone')
-
-        self.assertEqual(display_message.text, "Message: test message")
-
-        logout_link = self.browser.find_element_by_link_text('Log Out')
-        self.assertEqual(logout_link.text, "Log Out")
-
-        logout_link.click()
-
-        submit_buttom = self.browser.find_element_by_css_selector('button')
-
-        submit_buttom.click()
-
-        loggedout_message = self.browser.find_element_by_css_selector('h1')
-
-        self.assertEqual(loggedout_message.text, 'Log In')
 
 

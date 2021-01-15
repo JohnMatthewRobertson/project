@@ -1,4 +1,4 @@
-""" url endpoints"""
+""" url endpoints """
 
 from django.urls import path
 from feedback.views import FeedBackList, NewFeedBack

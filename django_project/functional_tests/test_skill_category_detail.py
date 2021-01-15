@@ -4,11 +4,11 @@ from django.contrib.auth import get_user_model
 from .base import FunctionalTest
 import time
 
-class SkillDetailTest(FunctionalTest):
-    """ test the skill detail view and skill detail edit """
+class SkillCategoryDetailTest(FunctionalTest):
+    """ test the skill Category detail view and skill Category detail edit """
 
     def test_user_can_log_and_access_skill_detail(self):
-        """ create test user login and access skill detail link """
+        """ create test user login and access skill Category detail link """
         normal_user = get_user_model()
         user = normal_user.objects.create_user(username=self.correct_test_username,
                                                email=self.correct_test_useremail,
@@ -45,17 +45,18 @@ class SkillDetailTest(FunctionalTest):
 
         self.assertEqual(loggedin_message.text, 'Home')
 
-        skill_detail_link = self.browser.find_element_by_link_text('Skill Detail')
-        self.assertEqual(skill_detail_link.text, "Skill Detail")
+        skill_detail_link = self.browser.find_element_by_link_text('Skill Category Detail')
+
+        self.assertEqual(skill_detail_link.text, "Skill Category Detail")
 
         skill_detail_link.click()
 
-        skill_list_page = self.browser.find_element_by_css_selector('h1')
+        skill_detail_page = self.browser.find_element_by_css_selector('h1')
 
-        self.assertEqual(skill_list_page.text, 'Skill Detail')
+        self.assertEqual(skill_detail_page.text, 'Skill Category Detail')
 
     def test_user_can_log_and_access_skill_detail_and_access_edit(self):
-        """ create test user login and access skill Detail link access edit """
+        """ create test user login and access skill Category Detail link access edit """
         normal_user = get_user_model()
         user = normal_user.objects.create_user(username=self.correct_test_username,
                                                email=self.correct_test_useremail,
@@ -92,14 +93,15 @@ class SkillDetailTest(FunctionalTest):
 
         self.assertEqual(loggedin_message.text, 'Home')
 
-        skill_detail_link = self.browser.find_element_by_link_text('Skill Detail')
-        self.assertEqual(skill_detail_link.text, "Skill Detail")
+        skill_detail_link = self.browser.find_element_by_link_text('Skill Category Detail')
+        
+        self.assertEqual(skill_detail_link.text, "Skill Category Detail")
 
         skill_detail_link.click()
 
-        skill_list_page = self.browser.find_element_by_css_selector('h1')
+        skill_detail_page = self.browser.find_element_by_css_selector('h1')
 
-        self.assertEqual(skill_list_page.text, 'Skill Detail')
+        self.assertEqual(skill_detail_page.text, 'Skill Category Detail')
 
 
 

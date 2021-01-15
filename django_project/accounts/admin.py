@@ -10,7 +10,7 @@ CustomUser = get_user_model()
 
 
 class CustomUserAdmin(UserAdmin):
-    """ form, model, field to display"""
+    """ form, model, field to display """
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser

@@ -8,5 +8,5 @@ from django.apps import AppConfig
 
 
 class HubConfig(AppConfig):
-    """ better comments """
+    """ class used by config/settings.py installed apps """
     name = 'hub'

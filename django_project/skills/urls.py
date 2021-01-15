@@ -1,4 +1,4 @@
-""" better comment """
+""" urls for skills """
 
 from django.urls import path
 from skills.views import (SkillListView,
